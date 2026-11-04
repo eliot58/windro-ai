@@ -1,0 +1,22 @@
+generator client {
+  provider     = "prisma-client"
+  output       = "../generated/prisma"
+  moduleFormat = "cjs"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+model User {
+  id         BigInt  @id
+  username   String?
+  firstName  String  @map("first_name")
+  lastName   String? @map("last_name")
+  isActive   Boolean @default(false) @map("is_active")
+  sellerCode String? @map("seller_code")
+  loggedOut  Boolean @default(false) @map("logged_out")
+
+  @@index([sellerCode])
+  @@map("users")
+}
