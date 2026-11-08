@@ -215,7 +215,7 @@ export class RecognitionService {
       }
       if (!errors.length) return best;
       this.logger.warn(
-        `${attemptModel}: попытка ${index + 1}, нарушений: ${errors.length}`,
+        `${attemptModel}: попытка ${index + 1}, нарушений: ${errors.length}: ${errors.slice(0, 3).join('; ')}`,
       );
     }
     return best;
