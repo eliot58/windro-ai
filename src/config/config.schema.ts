@@ -17,6 +17,7 @@ export const configSchema = Joi.object({
   // Telegram
   TELEGRAM_BOT_TOKEN: Joi.string().required(),
   TELEGRAM_WEBHOOK_SECRET: Joi.string().required(),
+  TELEGRAM_WEBHOOK_URL: Joi.string().uri().optional(),
   TELEGRAM_PROXY_URL: Joi.string().uri().optional(),
 
   // Модель распознавания
