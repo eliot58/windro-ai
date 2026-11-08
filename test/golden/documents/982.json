@@ -1,0 +1,15 @@
+{
+    "orderItems": [
+        {
+            "constructionType": "Дверь входная открывание наружу",
+            "profileName": "REHAU Входн.Дверь T-створка NEW 70", 
+            "furnitureName": "Входные группы (ПВХ)", 
+            "fill": "4x14x4x14x4", 
+            "qu": 1, 
+            "width": 1000, 
+            "height": 2300, 
+            "colorIn": "40 Ламинация нестандарт двухсторонняя",
+            "colorOut": "40 Ламинация нестандарт двухсторонняя",
+            "stvorka":{"openType": "pov", "openSide": "left"}
+        }]
+}

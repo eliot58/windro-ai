@@ -7,7 +7,7 @@ import proposalServerConfig from '../config/proposal-server.config';
 import { AdditionalItem, OrderItem } from '../recognition/recognition.types';
 import { ProposalSendResult } from './proposal-server.types';
 
-// Сервер КП отвечает сразу, а готовый PDF присылает позже на /api/v1/proposals/webhook
+// Сервер КП отвечает сразу, а готовый PDF присылает позже на адрес из поля url
 @Injectable()
 export class ProposalServerClient {
   private readonly logger = new Logger(ProposalServerClient.name);
@@ -31,6 +31,7 @@ export class ProposalServerClient {
           sellerCode,
           orderItems,
           ...(addOrderitems.length && { addOrderitems }),
+          url: this.config.webhookUrl,
         }),
       );
       if (status === 200 || status === 202) return { status: 'accepted' };

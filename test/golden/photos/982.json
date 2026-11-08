@@ -1,0 +1,15 @@
+{
+    "orderItems": [
+        {
+            "constructionType": "Дверь входная открывание наружу",
+            "profileName": "REHAU Входн. дв. NEW 70",
+            "furnitureName": "Входные группы",
+            "fill": "4x14x4x14x4",
+            "qu": 1,
+            "width": 1000,
+            "height": 2300,
+            "colorIn": "W",
+            "colorOut": "W",
+            "stvorka":{"openType": "pov", "openSide": "left"}
+        }]
+}

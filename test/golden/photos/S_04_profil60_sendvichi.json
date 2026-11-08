@@ -1,0 +1,182 @@
+{
+  "orderItems": [
+    {
+      "constructionType": "Окно",
+      "profileName": "60",
+      "furnitureName": "",
+      "fill": "24мм",
+      "qu": 1,
+      "width": 1500,
+      "height": 3000,
+      "colorIn": "W",
+      "colorOut": "Сигнально-белый",
+      "hImposts": [
+        {
+          "y": 1000,
+          "bottomFill": "S",
+          "bottomFillParam": {
+            "marking": "S",
+            "colorIn": "W",
+            "colorOut": "Сигнально-белый"
+          }
+        },
+        {
+          "y": 2200,
+          "topFill": "S",
+          "topFillParam": {
+            "marking": "S",
+            "colorIn": "W",
+            "colorOut": "Сигнально-белый"
+          }
+        }
+      ]
+    },
+    {
+      "constructionType": "Балконная дверь",
+      "profileName": "60",
+      "furnitureName": "",
+      "fill": "24мм",
+      "qu": 1,
+      "width": 1000,
+      "height": 2200,
+      "colorIn": "W",
+      "colorOut": "Сигнально-белый",
+      "stvorka": {
+        "openType": "pov",
+        "openSide": "right"
+      }
+    },
+    {
+      "constructionType": "Окно",
+      "profileName": "60",
+      "furnitureName": "",
+      "fill": "24мм",
+      "qu": 1,
+      "width": 1500,
+      "height": 3000,
+      "colorIn": "W",
+      "colorOut": "Сигнально-белый",
+      "hImposts": [
+        {
+          "y": 1000,
+          "bottomFill": "S",
+          "bottomFillParam": {
+            "marking": "S",
+            "colorIn": "W",
+            "colorOut": "Сигнально-белый"
+          }
+        },
+        {
+          "y": 2200,
+          "topFill": "S",
+          "topFillParam": {
+            "marking": "S",
+            "colorIn": "W",
+            "colorOut": "Сигнально-белый"
+          }
+        }
+      ]
+    },
+    {
+      "constructionType": "Окно",
+      "profileName": "60",
+      "furnitureName": "",
+      "fill": "S",
+      "fillParam": {
+        "marking": "S",
+        "colorIn": "W",
+        "colorOut": "Сигнально-белый"
+      },
+      "qu": 1,
+      "width": 1000,
+      "height": 800,
+      "colorIn": "W",
+      "colorOut": "Сигнально-белый"
+    },
+    {
+      "constructionType": "Окно",
+      "profileName": "60",
+      "furnitureName": "",
+      "fill": "24мм",
+      "qu": 1,
+      "width": 4000,
+      "height": 3000,
+      "colorIn": "W",
+      "colorOut": "Сигнально-белый",
+      "hImposts": [
+        {
+          "y": 1000,
+          "bottomFill": "S",
+          "bottomFillParam": {
+            "marking": "S",
+            "colorIn": "W",
+            "colorOut": "Сигнально-белый"
+          }
+        },
+        {
+          "y": 2200,
+          "topFill": "S",
+          "topFillParam": {
+            "marking": "S",
+            "colorIn": "W",
+            "colorOut": "Сигнально-белый"
+          }
+        }
+      ]
+    },
+    {
+      "constructionType": "Окно",
+      "profileName": "60",
+      "furnitureName": "",
+      "fill": "S",
+      "fillParam": {
+        "marking": "S",
+        "colorIn": "W",
+        "colorOut": "Сигнально-белый"
+      },
+      "qu": 1,
+      "width": 2000,
+      "height": 4000,
+      "colorIn": "W",
+      "colorOut": "Сигнально-белый"
+    },
+    {
+      "constructionType": "Окно",
+      "profileName": "60",
+      "furnitureName": "",
+      "fill": "24мм",
+      "qu": 2,
+      "width": 2000,
+      "height": 3000,
+      "colorIn": "W",
+      "colorOut": "Сигнально-белый",
+      "hImposts": [
+        {
+          "y": 1000,
+          "bottomFill": "S",
+          "bottomFillParam": {
+            "marking": "S",
+            "colorIn": "W",
+            "colorOut": "Сигнально-белый"
+          }
+        },
+        {
+          "y": 2200,
+          "topFill": "S",
+          "topFillParam": {
+            "marking": "S",
+            "colorIn": "W",
+            "colorOut": "Сигнально-белый"
+          }
+        }
+      ]
+    }
+  ],
+  "addOrderitems": [
+    {
+      "name": "Угол соединитель 90° 60/60",
+      "qu": 4,
+      "colorOut": "Сигнально-белый"
+    }
+  ]
+}

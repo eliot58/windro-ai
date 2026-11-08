@@ -18,7 +18,9 @@ import {
   RETRY_DELAY_MS,
 } from './constants/recognition.constants';
 import { DocumentReader } from './document-reader';
+import { HandwrittenOpeningsService } from './handwritten-openings.service';
 import { LlmClient } from './llm.client';
+import { OpeningClassifierService } from './opening-classifier.service';
 import { RecognitionError } from './recognition.error';
 import {
   AdditionalItem,
@@ -58,6 +60,8 @@ export class RecognitionService {
   constructor(
     private readonly reader: DocumentReader,
     private readonly llm: LlmClient,
+    private readonly openings: OpeningClassifierService,
+    private readonly handwritten: HandwrittenOpeningsService,
     @Inject(llmConfig.KEY)
     private readonly config: ConfigType<typeof llmConfig>,
   ) {}
@@ -82,22 +86,37 @@ export class RecognitionService {
 
     const mosquitoNets = parseMosquitoNets(fullText);
     const queue = new JobQueue(CONCURRENT_BLOCKS);
+    const failedBlocks: number[] = [];
     const extractBlock = async (block: DocumentBlock) => {
       const candidate = await this.askUntilValid(
         this.config.documentModel,
         DOCUMENT_PROMPT,
         DOCUMENT_USER_PROMPT,
-        block.image,
+        [block.image],
         (raw) => postprocessBlockItems(raw, block, mosquitoNets),
       );
-      if (candidate) return this.finalizeCandidate(candidate);
+      if (candidate) {
+        const items = this.finalizeCandidate(candidate);
+        // На странице скана может быть несколько изделий, а секции тогда не разделить
+        if (items.length === 1 && !isNonstandard(items[0])) {
+          await this.openings.correct(items[0], block.image);
+        }
+        return items;
+      }
 
-      this.logger.warn(`Блок ${block.blockNumber}: данные не извлечены`);
+      failedBlocks.push(block.blockNumber);
       return [];
     };
     const perBlock = await Promise.all(
       blocks.map((block) => queue.run(() => extractBlock(block))),
     );
+
+    // КП без одного из изделий хуже отказа: клиент получит неверную сумму
+    if (failedBlocks.length) {
+      throw new RecognitionError(
+        `не удалось прочитать изделие №${failedBlocks.sort((a, b) => a - b).join(', №')}, отправьте заявку ещё раз`,
+      );
+    }
 
     const items =
       blocks[0].documentType === DocumentType.Image
@@ -128,13 +147,14 @@ export class RecognitionService {
       this.config.photoModel,
       PHOTO_PROMPT,
       PHOTO_USER_PROMPT,
-      image,
+      [image],
       postprocessPhotoItems,
     );
     const items = candidate ? this.finalizeCandidate(candidate) : [];
     if (!candidate || !items.length) {
       throw new RecognitionError('изделия не найдены');
     }
+    await this.handwritten.correct(items, image);
 
     return {
       orderItems: replaceNonstandard(items),
@@ -167,7 +187,7 @@ export class RecognitionService {
     model: string,
     systemPrompt: string,
     userPrompt: string,
-    image: Buffer,
+    images: Buffer[],
     postprocess: (raw: OrderItem[]) => OrderItem[],
   ): Promise<Candidate | null> {
     const attempts = [
@@ -183,7 +203,7 @@ export class RecognitionService {
         model: attemptModel,
         systemPrompt,
         userPrompt: feedbackPrompt(userPrompt, best?.errors ?? []),
-        image,
+        images,
       });
       if (!raw || !Array.isArray(raw.orderItems)) continue;
 

@@ -1,0 +1,61 @@
+{
+  "orderItems": [
+    {
+      "constructionType": "Окно",
+      "profileName": "Грацио",
+      "furnitureName": "VORNE",
+      "fill": "СПД 40",
+      "qu": 1,
+      "width": 2040,
+      "height": 1300,
+      "colorIn": "W",
+      "colorOut": "W",
+      "vImposts": [
+        {
+          "x": 680,
+          "leftFill": "S",
+          "leftFillParam": {
+            "marking": "S",
+            "colorIn": "W",
+            "colorOut": "W"
+          }
+        },
+        {
+          "x": 1360,
+          "leftStvorka": {
+            "openType": "povOtk",
+            "openSide": "right",
+            "isMoskit": true
+          }
+        }
+      ]
+    },
+    {
+      "constructionType": "Окно",
+      "profileName": "Грацио",
+      "furnitureName": "VORNE",
+      "fill": "СПД 40",
+      "qu": 1,
+      "width": 880,
+      "height": 1050,
+      "colorIn": "W",
+      "colorOut": "W",
+      "stvorka": {
+        "openType": "pov",
+        "openSide": "right",
+        "hImposts": [
+          {
+            "y": 380,
+            "bottomFill": "S",
+            "bottomFillParam": {
+              "marking": "S",
+              "colorIn": "W",
+              "colorOut": "W"
+            }
+          }
+        ]
+      }
+    }
+  ],
+  "addOrderitems": []
+}

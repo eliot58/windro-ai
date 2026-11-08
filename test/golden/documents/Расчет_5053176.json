@@ -1,0 +1,64 @@
+{
+"orderItems": [
+      {
+        "constructionType": "Окно",
+        "profileName": "Brusbox Super 70",
+        "furnitureName": "Roto NX",
+        "fill": "4x14x4TopNx14x4Кал.",
+        "qu": 19,
+        "width": 1260,
+        "height": 1800,
+        "colorIn": "W",
+        "colorOut": "55.1 Темно-серый снаружи(KGAG34D)",
+        "hImposts":[{"y":1300, "bottomImposts":[{"x": 630, "rightStvorka":{"openType": "povOtk", "openSide":"right"}}]}]
+    },
+    {
+        "constructionType": "Окно",
+        "profileName": "Brusbox Super 70",
+        "furnitureName": "Roto NX",
+        "fill": "4x14x4TopNx14x4Кал.",
+        "qu": 6,
+        "width": 2050,
+        "height": 1800,
+        "colorIn": "W",
+        "colorOut": "55.1 Темно-серый снаружи(KGAG34D)",
+        "hImposts":[{"y":1300, "bottomImposts":[{"x": 683, "leftStvorka":{"openType": "pov", "openSide":"left"}},{"x": 1367, "rightStvorka":{"openType": "povOtk", "openSide":"right"}}], "topImposts": [{"x": 1025}]}]
+    },
+    {
+        "constructionType": "Окно",
+        "profileName": "Brusbox Super 70",
+        "furnitureName": "Roto NX",
+        "fill": "4x14x4TopNx14x4Кал.",
+        "qu": 14,
+        "width": 1070,
+        "height": 1830,
+        "colorIn": "W",
+        "colorOut": "55.1 Темно-серый снаружи(KGAG34D)",
+        "hImposts":[{"y":1330}]
+    },
+    {
+        "constructionType": "Окно",
+        "profileName": "Brusbox Super 70",
+        "furnitureName": "Roto NX",
+        "fill": "4x14x4TopNx14x4Кал.",
+        "qu": 2,
+        "width": 2100,
+        "height": 1400,
+        "colorIn": "W",
+        "colorOut": "55.1 Темно-серый снаружи(KGAG34D)",
+        "vImposts":[{"x":700, "leftStvorka":{"openType": "pov", "openSide":"left"}},{"x":1400, "rightStvorka":{"openType": "povOtk", "openSide":"right"}}]
+    },
+    {
+       "constructionType": "Окно",
+       "profileName": "Brusbox Super 70",
+       "furnitureName": "Roto NX",
+       "fill": "4x14x4TopNx14x4Кал.",
+       "qu": 2,
+       "width": 1423,
+       "height": 2100,
+       "colorIn": "W",
+       "colorOut": "55.1 Темно-серый снаружи(KGAG34D)",
+       "hImposts":[{"y":500, "topImposts":[{"x": 711, "leftStvorka":{"openType": "povOtk", "openSide":"left"}}]}]
+    }
+  ]
+}

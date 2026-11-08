@@ -1,0 +1,52 @@
+{
+  "orderItems": [
+    {
+      "constructionType": "Балконная дверь",
+      "profileName": "Блиц",
+      "furnitureName": "VORNE",
+      "fill": "4-10-4-10-4",
+      "qu": 1,
+      "width": 850,
+      "height": 2150,
+      "colorIn": "W",
+      "colorOut": "W",
+      "stvorka": {
+        "openType": "pov",
+        "openSide": "right",
+        "hImposts": [
+          {
+            "y": 700,
+            "bottomFill": "S",
+            "bottomFillParam": {
+              "marking": "S",
+              "colorIn": "W",
+              "colorOut": "W"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "constructionType": "Окно",
+      "profileName": "Блиц",
+      "furnitureName": "VORNE",
+      "fill": "4-10-4-10-4",
+      "qu": 1,
+      "width": 1400,
+      "height": 1600,
+      "colorIn": "W",
+      "colorOut": "W",
+      "vImposts": [
+        {
+          "x": 700,
+          "leftStvorka": {
+            "openType": "povOtk",
+            "openSide": "left",
+            "isMoskit": true
+          }
+        }
+      ]
+    }
+  ],
+  "addOrderitems": []
+}

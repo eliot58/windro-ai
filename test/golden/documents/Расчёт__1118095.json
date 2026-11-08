@@ -1,0 +1,21 @@
+{
+  "sellerCode": "1234-5678",
+  "orderItems": [
+    {
+      "constructionType": "Окно",
+      "profileName": "58 Techno",
+      "furnitureName": "Vorne",
+      "fill": "4м1-10-4м1-10-4м1",
+      "qu": 20,
+      "width": 900,
+      "height": 1400,
+      "colorIn": "W",
+      "colorOut": "W",
+      "stvorka": {
+        "openType": "povOtk",
+        "openSide": "right",
+        "isMoskit": true
+      }
+    }
+  ]
+}

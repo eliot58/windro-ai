@@ -12,7 +12,8 @@ Telegram-бот и HTTP API: принимают заявку на окна (PDF,
    уходят обратно модели, после трёх попыток подключается запасная модель.
 5. Изделия уходят на сервер КП, а готовый PDF приходит на `/api/v1/proposals/webhook`.
 
-Локальных ML-моделей нет. Москитки и дополнительные изделия берутся из текста документа.
+Открывания на чертежах документов проверяет локальная модель `recognition/models/opening-classifier.onnx`.
+Москитки и дополнительные изделия берутся из текста документа.
 
 ## Запуск
 
@@ -43,8 +44,9 @@ npm run start:dev
 | POST | `/proposals/webhook` | готовый PDF от сервера КП |
 | POST | `/telegram/webhook` | обновления Telegram |
 
-Все адреса, кроме `/telegram/webhook`, требуют заголовок `x-api-key` со значением `API_KEY`.
-У вебхука Telegram своя проверка секретом.
+Адреса `/orders` требуют заголовок `x-api-key` со значением `API_KEY`.
+Вебхук Telegram проверяет свой секрет. Вебхук КП открыт: сервер КП не умеет слать заголовки,
+его адрес передаётся в каждом заказе в поле `url`.
 
 Запросы `/orders` принимают `multipart/form-data` с полями `file`, `callbackUrl`, `sellerCode`.
 Ответ `202` содержит `requestId`, результат приходит POST-запросом на `callbackUrl`.
@@ -55,8 +57,10 @@ npm run start:dev
 ```bash
 npm test
 npm run test:e2e
-npm run eval:golden -- <папка с эталонами> --limit 5
+npm run eval:golden -- test/golden/documents
+npm run eval:golden -- test/golden/photos --limit 5
 ```
 
 `eval:golden` сравнивает распознавание с эталонными JSON и тратит запросы к OpenRouter.
+Эталоны лежат в `test/golden`: рядом с каждым файлом заявки — `.json` с ожидаемым результатом.
 Промпты лежат в `src/recognition/prompts`.

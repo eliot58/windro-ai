@@ -1,0 +1,38 @@
+{
+  "orderItems": [
+    {
+      "constructionType": "Окно",
+      "profileName": "Blitz",
+      "furnitureName": "ROTO NX",
+      "fill": "4-10-4-10-4",
+      "qu": 1,
+      "width": 1350,
+      "height": 1430,
+      "colorIn": "W",
+      "colorOut": "W",
+      "vImposts": [
+        {
+          "x": 675,
+          "rightStvorka": {"openType": "povOtk", "openSide": "left", "isMoskit": true}
+        }
+      ]
+    },
+    {
+      "constructionType": "Окно",
+      "profileName": "Blitz",
+      "furnitureName": "ROTO NX",
+      "fill": "4-10-4-10-4",
+      "qu": 1,
+      "width": 1350,
+      "height": 1430,
+      "colorIn": "W",
+      "colorOut": "W",
+      "vImposts": [
+        {
+          "x": 675,
+          "leftStvorka": {"openType": "pov", "openSide": "right"}
+        }
+      ]
+    }
+  ]
+}

@@ -6,7 +6,6 @@ import {
   NotFoundException,
   Post,
   Req,
-  UseGuards,
 } from '@nestjs/common';
 import { ApiExcludeController } from '@nestjs/swagger';
 import type { FastifyRequest } from 'fastify';
@@ -14,7 +13,6 @@ import type { FastifyRequest } from 'fastify';
 import { SELLER_CODE } from '../common/common.constants';
 import { SubmittedForm } from '../common/common.types';
 import { readForm } from '../common/form-reader';
-import { ApiKeyGuard } from '../common/guards/api-key.guard';
 import {
   PROPOSAL_FAILED_MESSAGE,
   PROPOSAL_READY_MESSAGE,
@@ -28,7 +26,6 @@ import { OrderRequestsService } from './order-requests.service';
 // Сервер КП присылает сюда готовый PDF. sellerCode из ожидающего запроса фронтенда
 // ведёт на его callback, код XXXX-XXXX ведёт к пользователю Telegram
 @ApiExcludeController()
-@UseGuards(ApiKeyGuard)
 @Controller('proposals/webhook')
 export class ProposalWebhookController {
   private readonly logger = new Logger(ProposalWebhookController.name);

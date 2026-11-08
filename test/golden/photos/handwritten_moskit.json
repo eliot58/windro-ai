@@ -1,0 +1,148 @@
+{
+  "success": true,
+  "orderItems": [
+    {
+      "constructionType": "Окно",
+      "profileName": "Грацио",
+      "furnitureName": "РОТО",
+      "fill": "2х-кам СИ",
+      "qu": 1,
+      "width": 1200,
+      "height": 1640,
+      "colorIn": "W",
+      "colorOut": "W",
+      "vImposts": [
+        {
+          "x": 600,
+          "leftStvorka": {
+            "openType": "povOtk",
+            "openSide": "left"
+          }
+        }
+      ]
+    },
+    {
+      "constructionType": "Окно",
+      "profileName": "Грацио",
+      "furnitureName": "РОТО",
+      "fill": "2х-кам СИ",
+      "qu": 1,
+      "width": 695,
+      "height": 1640,
+      "colorIn": "W",
+      "colorOut": "W",
+      "vImposts": []
+    },
+    {
+      "constructionType": "Окно",
+      "profileName": "Грацио",
+      "furnitureName": "РОТО",
+      "fill": "2х-кам СИ",
+      "qu": 1,
+      "width": 730,
+      "height": 1640,
+      "colorIn": "W",
+      "colorOut": "W",
+      "stvorka": {
+        "openType": "povOtk",
+        "openSide": "left",
+        "isMoskit": true
+      }
+    },
+    {
+      "constructionType": "Окно",
+      "profileName": "Грацио",
+      "furnitureName": "РОТО",
+      "fill": "2х-кам СИ",
+      "qu": 1,
+      "width": 740,
+      "height": 1640,
+      "colorIn": "W",
+      "colorOut": "W",
+      "stvorka": {
+        "openType": "povOtk",
+        "openSide": "right",
+        "isMoskit": true
+      }
+    },
+    {
+      "constructionType": "Окно",
+      "profileName": "Грацио",
+      "furnitureName": "РОТО",
+      "fill": "2х-кам СИ",
+      "qu": 1,
+      "width": 995,
+      "height": 1640,
+      "colorIn": "W",
+      "colorOut": "W",
+      "vImposts": []
+    },
+    {
+      "constructionType": "Окно",
+      "profileName": "Грацио",
+      "furnitureName": "РОТО",
+      "fill": "2х-кам СИ",
+      "qu": 1,
+      "width": 1200,
+      "height": 940,
+      "colorIn": "W",
+      "colorOut": "W",
+      "vImposts": [
+        {
+          "x": 600
+        }
+      ]
+    },
+    {
+      "constructionType": "Окно",
+      "profileName": "Грацио",
+      "furnitureName": "РОТО",
+      "fill": "2х-кам СИ",
+      "qu": 1,
+      "width": 695,
+      "height": 940,
+      "colorIn": "W",
+      "colorOut": "W",
+      "vImposts": []
+    },
+    {
+      "constructionType": "Окно",
+      "profileName": "Грацио",
+      "furnitureName": "РОТО",
+      "fill": "2х-кам СИ",
+      "qu": 1,
+      "width": 730,
+      "height": 940,
+      "colorIn": "W",
+      "colorOut": "W",
+      "vImposts": []
+    },
+    {
+      "constructionType": "Окно",
+      "profileName": "Грацио",
+      "furnitureName": "РОТО",
+      "fill": "2х-кам СИ",
+      "qu": 1,
+      "width": 740,
+      "height": 940,
+      "colorIn": "W",
+      "colorOut": "W",
+      "vImposts": []
+    },
+    {
+      "constructionType": "Окно",
+      "profileName": "Грацио",
+      "furnitureName": "РОТО",
+      "fill": "2х-кам СИ",
+      "qu": 1,
+      "width": 995,
+      "height": 940,
+      "colorIn": "W",
+      "colorOut": "W",
+      "vImposts": []
+    }
+  ],
+  "addOrderitems": [],
+  "blocks_count": 1,
+  "errors": []
+}

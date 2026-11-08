@@ -30,12 +30,12 @@ export class LlmClient {
               role: 'user',
               content: [
                 { type: 'text', text: request.userPrompt },
-                {
+                ...request.images.map((image) => ({
                   type: 'image_url',
                   image_url: {
-                    url: `data:image/png;base64,${request.image.toString('base64')}`,
+                    url: `data:image/png;base64,${image.toString('base64')}`,
                   },
-                },
+                })),
               ],
             },
           ],

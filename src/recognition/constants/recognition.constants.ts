@@ -21,7 +21,8 @@ export const PRIMARY_MODEL_ATTEMPTS = 3;
 
 export const RETRY_DELAY_MS = 2_000;
 
-export const MAX_PHOTO_SIDE = 2048;
+// Мелкий почерк на бланке теряется при меньшем размере
+export const MAX_PHOTO_SIDE = 3072;
 
 export const MAX_FEEDBACK_ERRORS = 10;
 

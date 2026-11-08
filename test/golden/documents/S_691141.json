@@ -1,0 +1,24 @@
+{
+  "orderItems": [
+    {
+      "constructionType": "Окно",
+      "profileName": "Brusbox Super",
+      "furnitureName": "Fornax",
+      "fill": "4-14-4-14-4",
+      "qu": 20,
+      "width": 2000,
+      "height": 2300,
+      "colorIn": "W",
+      "colorOut": "Махагон(9.2097013-116700)",
+      "vImposts": [
+        {
+          "x": 1000,
+          "rightStvorka": {
+            "openType": "povOtk",
+            "openSide": "right"
+          }
+        }
+      ]
+    }
+  ]
+}

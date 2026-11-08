@@ -1,0 +1,56 @@
+{
+  "orderItems": [
+    {
+      "constructionType": "Окно",
+      "profileName": "Blitz 62",
+      "furnitureName": "UPT",
+      "fill": "4-10-4-10-4",
+      "qu": 1,
+      "width": 1640,
+      "height": 1900,
+      "colorIn": "W",
+      "colorOut": "W",
+      "vImposts": [
+        {
+          "x": 600,
+          "leftStvorka": {
+            "openType": "povOtk",
+            "openSide": "left"
+          }
+        }
+      ]
+    },
+    {
+      "constructionType": "Окно",
+      "profileName": "Blitz 62",
+      "furnitureName": "",
+      "fill": "4-10-4-10-4",
+      "qu": 1,
+      "width": 1640,
+      "height": 1100,
+      "colorIn": "W",
+      "colorOut": "W",
+      "vImposts": []
+    },
+    {
+      "constructionType": "Окно",
+      "profileName": "Blitz 62",
+      "furnitureName": "UPT",
+      "fill": "4-10-4-10-4",
+      "qu": 1,
+      "width": 1400,
+      "height": 1400,
+      "colorIn": "W",
+      "colorOut": "W",
+      "vImposts": [
+        {
+          "x": 700,
+          "rightStvorka": {
+            "openType": "povOtk",
+            "openSide": "right"
+          }
+        }
+      ]
+    }
+  ]
+}

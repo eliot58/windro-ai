@@ -108,6 +108,9 @@ export function normalizeFurnitureName(
       if (index > 0) name = name.slice(0, index).trim();
     }
   }
+  // «Наж. гар.» и «Наж.гар.» одна и та же фурнитура
+  name = name.replace(/\.\s+(?=\S)/g, '.');
+
   // Серия Roto определяется по D-кодам в тексте страницы
   if (
     !door &&
@@ -119,6 +122,37 @@ export function normalizeFurnitureName(
   }
   return name;
 }
+
+// Кириллические буквы, неотличимые от латинских
+const LATIN_LOOKALIKES: Record<string, string> = {
+  А: 'A',
+  В: 'B',
+  Е: 'E',
+  К: 'K',
+  М: 'M',
+  Н: 'H',
+  О: 'O',
+  Р: 'P',
+  С: 'C',
+  Т: 'T',
+  Х: 'X',
+  а: 'a',
+  е: 'e',
+  о: 'o',
+  р: 'p',
+  с: 'c',
+  у: 'y',
+  х: 'x',
+};
+
+// В слове со смесью алфавитов («ТорN») кириллица это ошибка чтения латиницы
+const fixMixedScript = (text: string) =>
+  // Только буквенные куски: «Кал.» в «4x14x4TopNx14x4Кал.» не трогаем
+  text.replace(/[A-Za-zА-Яа-яЁё]+/g, (word) =>
+    /[A-Za-z]/.test(word) && /[А-Яа-яЁё]/.test(word)
+      ? word.replace(/[А-Яа-яЁё]/g, (c) => LATIN_LOOKALIKES[c] ?? c)
+      : word,
+  );
 
 function normalizeFill(raw: string): string {
   let fill = raw.replace(/\s*СП\/п\s*/gu, '').replace(/\s*ст\/п\s*/giu, '');
@@ -132,6 +166,7 @@ function normalizeFill(raw: string): string {
     .replace(/\s*\(\d+\)\s*$/, '')
     .replace(/(\d)M(\d)/g, '$1М$2')
     .replace(/(\d)\s*[хХ]\s*(?=\d)/gu, '$1x')
+    .replace(/\S+/g, fixMixedScript)
     .trim();
 }
 

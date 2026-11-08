@@ -1,0 +1,49 @@
+{
+  "orderItems": [
+    {
+        "constructionType": "Дверь входная открывание наружу",
+        "profileName": "60 Rehau", 
+        "furnitureName": "????", 
+        "fill": "????", 
+        "qu": 1, 
+        "width": 1180, 
+        "height": 2480, 
+        "colorIn": "GO502 Полосатая сосна (заказ)",
+        "colorOut": "02.11.31.000012-116700 Винно-красный 3005 (заказ)", 
+        "stvorka":{"openType": "pov", "openSide": "right"}
+    },
+    {   "constructionType": "Балконная дверь",
+        "profileName": "60 Brusbox", 
+        "furnitureName": "ROTO NX", 
+        "fill": "4м1-24-4м1", 
+        "qu": 1, 
+        "width": 880, 
+        "height": 2290, 
+        "colorIn": "GO502 Полосатая сосна (заказ)",
+        "colorOut": "02.11.31.000012-116700 Винно-красный 3005 (заказ)", 
+        "stvorka":{"openType": "povOtk", "openSide": "left"}
+    },
+    {   "constructionType": "Балконная дверь",
+        "profileName": "60 Brusbox", 
+        "furnitureName": "ROTO NX", 
+        "fill": "4м1-24-4м1", 
+        "qu": 1, 
+        "width": 750, 
+        "height": 2290, 
+        "colorIn": "GO502 Полосатая сосна (заказ)",
+        "colorOut": "02.11.31.000012-116700 Винно-красный 3005 (заказ)", 
+        "stvorka":{"openType": "povOtk", "openSide": "left"}
+    },
+    {   "constructionType": "Балконная дверь",
+        "profileName": "60 Brusbox", 
+        "furnitureName": "ROTO NX", 
+        "fill": "4м1-24-4м1", 
+        "qu": 1, 
+        "width": 1130, 
+        "height": 2290, 
+        "colorIn": "GO502 Полосатая сосна (заказ)",
+        "colorOut": "02.11.31.000012-116700 Винно-красный 3005 (заказ)", 
+        "stvorka":{"openType": "povOtk", "openSide": "left"}
+    }
+  ]
+}

@@ -1,6 +1,8 @@
 /* eslint-disable @typescript-eslint/no-unsafe-member-access -- данные приходят от модели и из XML, их форма проверяется валидатором */
 import { DocumentReader } from './document-reader';
+import { HandwrittenOpeningsService } from './handwritten-openings.service';
 import { LlmClient } from './llm.client';
+import { OpeningClassifierService } from './opening-classifier.service';
 import { RecognitionError } from './recognition.error';
 import { RecognitionService } from './recognition.service';
 import { DocumentType } from './recognition.types';
@@ -47,6 +49,8 @@ describe('RecognitionService', () => {
   const service = new RecognitionService(
     reader as unknown as DocumentReader,
     { extract } as unknown as LlmClient,
+    { correct: jest.fn() } as unknown as OpeningClassifierService,
+    { correct: jest.fn() } as unknown as HandwrittenOpeningsService,
     CONFIG as never,
   );
 
@@ -116,6 +120,27 @@ describe('RecognitionService', () => {
 
     expect(result.orderItems).toEqual([{ error: 1 }]);
     expect(extract).toHaveBeenCalledTimes(1);
+  });
+
+  it('rejects the order when a block could not be read', async () => {
+    reader.read.mockResolvedValue({
+      blocks: [BLOCK, { ...BLOCK, blockNumber: 2 }],
+      fullText: '',
+      pageTexts: [],
+    });
+    extract.mockImplementation(({ images }: { images: Buffer[] }) =>
+      Promise.resolve(
+        images[0] === BLOCK.image ? { orderItems: [VALID_ITEM] } : null,
+      ),
+    );
+    const second = { ...BLOCK, blockNumber: 2, image: Buffer.from('other') };
+    reader.read.mockResolvedValue({
+      blocks: [BLOCK, second],
+      fullText: '',
+      pageTexts: [],
+    });
+
+    await expect(service.recognize(DOCUMENT)).rejects.toThrow('изделие №2');
   });
 
   it('does not treat an empty page as an error', async () => {

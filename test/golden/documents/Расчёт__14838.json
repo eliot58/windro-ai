@@ -1,0 +1,45 @@
+{
+  "orderItems": [
+    {
+      "constructionType": "Окно",
+      "profileName": "60 Reachmont Eco",
+      "furnitureName": "Verta",
+      "fill": "4м1-10-4м1-10-4м1",
+      "qu": 3,
+      "width": 1350,
+      "height": 1110,
+      "colorIn": "W",
+      "colorOut": "W",
+      "vImposts": [
+        {
+          "x": 675,
+          "rightStvorka": {
+            "openType": "povOtk",
+            "openSide": "right",
+            "isMoskit": true
+          }
+        }
+      ]
+    },
+    {
+      "constructionType": "Окно",
+      "profileName": "60 Reachmont Eco",
+      "furnitureName": "Verta",
+      "fill": "4м1-10-4м1-10-4м1",
+      "qu": 1,
+      "width": 1350,
+      "height": 1110,
+      "colorIn": "W",
+      "colorOut": "W",
+      "vImposts": [
+        {
+          "x": 675,
+          "rightStvorka": {
+            "openType": "povOtk",
+            "openSide": "right"
+          }
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,40 @@
+{
+  "orderItems": [
+    {
+	"constructionType": "Дверь входная открывание наружу",
+	"profileName": "????",
+	"furnitureName": "????",
+	"fill": "4-14-4-14-4",
+	"qu": 1,
+	"width": 920,
+	"height": 1840,
+	"colorIn": "W",
+	"colorOut": "W",
+	"stvorka": {"openType": "pov", "openSide": "left"}
+    },
+    {
+        "constructionType": "Дверь входная открывание наружу",
+	"profileName": "????",
+	"furnitureName": "????",
+	"fill": "4-14-4-14-4",
+	"qu": 1,
+	"width": 820,
+	"height": 2000,
+	"colorIn": "W",
+	"colorOut": "W",
+	"stvorka":{"openType": "pov", "openSide": "right"}
+    },
+    {
+        "constructionType": "Дверь входная открывание наружу",
+	"profileName": "????",
+	"furnitureName": "????",
+	"fill": "4-14-4-14-4",
+	"qu": 1,
+	"width": 820,
+	"height": 2000,
+	"colorIn": "W",
+	"colorOut": "W",
+	"stvorka":{"openType": "pov", "openSide": "right"}
+    }
+  ]
+}

@@ -1,0 +1,48 @@
+{
+  "orderItems": [
+    {
+      "constructionType": "Окно",
+      "profileName": "Grazio",
+      "furnitureName": "ОКНО",
+      "fill": "4м1-10-4м1-10-4м1",
+      "qu": 1,
+      "width": 1500,
+      "height": 1540,
+      "colorIn": "W",
+      "colorOut": "W",
+      "vImposts": [
+        {
+          "x": 550,
+          "leftStvorka": {
+            "openType": "povOtk",
+            "openSide": "right"
+          },
+          "rightStvorka": {
+            "openType": "pov",
+            "openSide": "right"
+          }
+        }
+      ]
+    },
+    {
+      "constructionType": "Окно",
+      "profileName": "Grazio",
+      "furnitureName": "ОКНО",
+      "fill": "4м1-10-4м1-10-4м1",
+      "qu": 1,
+      "width": 1120,
+      "height": 1540,
+      "colorIn": "W",
+      "colorOut": "W",
+      "vImposts": [
+        {
+          "x": 609,
+          "leftStvorka": {
+            "openType": "povOtk",
+            "openSide": "left"
+          }
+        }
+      ]
+    }
+  ]
+}

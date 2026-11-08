@@ -1,0 +1,28 @@
+{
+  "orderItems": [
+    {
+      "constructionType": "Окно",
+      "profileName": "Blitz NEW-60",
+      "furnitureName": "FUTURUSS",
+      "fill": "4М1-16-4М1",
+      "qu": 2,
+      "width": 1690,
+      "height": 660,
+      "colorIn": "Антрацитово-серый гладкий KDB74-F7(Цвет основы Белый)",
+      "colorOut": "Антрацитово-серый гладкий KDB74-F7",
+      "vImposts": [{"x": 845}]
+    },
+    {
+      "constructionType": "Окно",
+      "profileName": "Blitz NEW-60",
+      "furnitureName": "FUTURUSS",
+      "fill": "4М1-16-4М1",
+      "qu": 2,
+      "width": 1720,
+      "height": 660,
+      "colorIn": "Антрацитово-серый гладкий KDB74-F7(Цвет основы Белый)",
+      "colorOut": "Антрацитово-серый гладкий KDB74-F7",
+      "vImposts": [{"x": 860}]
+    }
+  ]
+}

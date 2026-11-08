@@ -299,10 +299,8 @@ describe('App (e2e)', () => {
     const upload = () =>
       multipart({ callbackUrl: CALLBACK_URL }, { name: 'a.pdf', content: 'x' });
 
-    it.each([
-      ['orders', `${API}/orders/recognize/document`],
-      ['proposal webhook', `${API}/proposals/webhook`],
-    ])('rejects a request to %s without a key', async (_name, url) => {
+    it('rejects an order request without a key', async () => {
+      const url = `${API}/orders/recognize/document`;
       const { headers, payload } = upload();
       const res = await app.inject({
         method: 'POST',
@@ -326,6 +324,16 @@ describe('App (e2e)', () => {
       });
       expect(res.statusCode).toBe(401);
     });
+  });
+
+  it('accepts the proposal webhook without a key', async () => {
+    const res = await app.inject({
+      method: 'POST',
+      url: `${API}/proposals/webhook`,
+      payload: 'x',
+      headers: { 'content-type': 'multipart/form-data; boundary=b' },
+    });
+    expect(res.statusCode).not.toBe(401);
   });
 
   describe('frontend API', () => {

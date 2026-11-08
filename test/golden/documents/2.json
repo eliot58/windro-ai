@@ -1,0 +1,27 @@
+{
+  "orderItems": [
+    {
+        "constructionType": "Дверь входная открывание наружу",
+        "profileName": "REHAU Дверь наружное открывание T116/70", 
+        "furnitureName": "Одностворчатая многозапорный с Наж.гар.DR 35", 
+        "fill": "40мм 6Energy Light/14/4/12/4LowE",
+        "qu": 1, 
+        "width": 885, 
+        "height": 2100, 
+        "colorIn": "Антрац-серый KDB74-Z8 701605",
+        "colorOut": "Антрац-серый KDB74-Z8 701605(Цвет основы белый)",
+        "stvorka":{"openType": "pov", "openSide": "right"}
+    },
+    {
+        "constructionType": "Дверь входная открывание наружу",
+        "profileName": "REHAU Дверь наружное открывание T116/70",
+        "furnitureName": "Одностворчатая многозапорный с Наж.гар.DR 35",
+        "fill": "40мм 6Energy Light/14/4/12/4LowE",
+        "qu": 1,
+        "width": 860,
+        "height": 2090,
+        "colorIn": "Антрац-серый KDB74-Z8 701605",
+        "colorOut": "Антрац-серый KDB74-Z8 701605(Цвет основы белый)", 
+        "stvorka":{"openType": "pov", "openSide": "left"}}
+  ]
+}

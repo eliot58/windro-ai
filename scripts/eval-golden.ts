@@ -1,6 +1,6 @@
 // Замер точности на эталонах: для каждого файла с парным .json запускает
 // распознавание и сравнивает результат с эталоном.
-//   npm run eval:golden -- <папка с эталонами> [--limit N]
+//   npm run eval:golden -- test/golden/documents [--limit N]
 // Каждый файл стоит реальных запросов к OpenRouter
 import 'dotenv/config';
 import 'reflect-metadata';
@@ -18,7 +18,9 @@ import {
   LLM_TIMEOUT_MS,
 } from '../src/recognition/constants/llm.constants';
 import { DocumentReader } from '../src/recognition/document-reader';
+import { HandwrittenOpeningsService } from '../src/recognition/handwritten-openings.service';
 import { LlmClient } from '../src/recognition/llm.client';
+import { OpeningClassifierService } from '../src/recognition/opening-classifier.service';
 import { RecognitionService } from '../src/recognition/recognition.service';
 
 const DOCUMENTS = ['.pdf', '.docx', '.doc'];
@@ -97,6 +99,8 @@ async function main() {
         }),
       ),
     ),
+    new OpeningClassifierService(),
+    new HandwrittenOpeningsService(),
     config,
   );
 

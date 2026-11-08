@@ -1,0 +1,66 @@
+{
+  "orderItems": [
+    {
+      "constructionType": "Окно",
+      "profileName": "Blitz",
+      "furnitureName": "",
+      "fill": "4-16-4",
+      "qu": 20,
+      "width": 3000,
+      "height": 940,
+      "colorIn": "W",
+      "colorOut": "W",
+      "vImposts": [
+        {
+          "x": 1000
+        },
+        {
+          "x": 2000
+        }
+      ]
+    },
+    {
+      "constructionType": "Окно",
+      "profileName": "Blitz",
+      "furnitureName": "",
+      "fill": "4-16-4",
+      "qu": 7,
+      "width": 2940,
+      "height": 940,
+      "colorIn": "W",
+      "colorOut": "W",
+      "vImposts": [
+        {
+          "x": 980
+        },
+        {
+          "x": 1960
+        }
+      ]
+    },
+    {
+      "constructionType": "Окно",
+      "profileName": "Blitz",
+      "furnitureName": "VORNE",
+      "fill": "4-16-4",
+      "qu": 2,
+      "width": 2940,
+      "height": 940,
+      "colorIn": "W",
+      "colorOut": "W",
+      "vImposts": [
+        {
+          "x": 980
+        },
+        {
+          "x": 1960,
+          "leftStvorka": {
+            "openType": "povOtk",
+            "openSide": "right",
+            "isMoskit": true
+          }
+        }
+      ]
+    }
+  ]
+}

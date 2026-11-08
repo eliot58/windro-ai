@@ -1,5 +1,6 @@
 import {
   fixSwappedDimensions,
+  normalizeFurnitureName,
   normalizeProfileName,
   normalizeSectionFill,
 } from './order-normalizer.utils';
@@ -66,5 +67,23 @@ describe('name normalization', () => {
     expect(normalizeSectionFill('Сэндвич24', false)).toBe('S');
     expect(normalizeSectionFill('С 32', true)).toBe('S');
     expect(normalizeSectionFill('С 32', false)).toBe('С 32');
+  });
+});
+
+describe('text normalization', () => {
+  it('drops spaces after dots in furniture names', () => {
+    expect(normalizeFurnitureName('НАЖ. ГАР. DR 35', true)).toBe(
+      'НАЖ.ГАР.DR 35',
+    );
+  });
+
+  it('fixes Cyrillic letters inside Latin words of a fill', () => {
+    expect(normalizeSectionFill('4x14x4ТорNх14x4 кал.', false)).toBe(
+      '4x14x4TopNx14x4 кал.',
+    );
+    expect(normalizeSectionFill('4М1-16-4М1', false)).toBe('4М1-16-4М1');
+    expect(normalizeSectionFill('4x14x4TopNx14x4Кал.', false)).toBe(
+      '4x14x4TopNx14x4Кал.',
+    );
   });
 });

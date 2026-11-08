@@ -1,3 +1,5 @@
+import { OPENING_CLASSES } from './constants/opening.constants';
+
 // Произвольный JSON от модели, его форму проверяет валидатор
 export type Obj = Record<string, any>;
 
@@ -64,7 +66,7 @@ export interface VisionRequest {
   model: string;
   systemPrompt: string;
   userPrompt: string;
-  image: Buffer;
+  images: Buffer[];
 }
 
 export interface ChatResponse {
@@ -100,4 +102,36 @@ export interface Candidate {
   raw: Record<string, unknown>;
   items: OrderItem[];
   errors: string[];
+}
+
+export type OpeningClass = (typeof OPENING_CLASSES)[number];
+
+export interface OpeningPrediction {
+  name: OpeningClass;
+  confidence: number;
+}
+
+export interface PixelBox {
+  x: number;
+  y: number;
+  width: number;
+  height: number;
+}
+
+export interface RawImage {
+  data: Buffer;
+  width: number;
+  height: number;
+}
+
+// Секция изделия в миллиметрах, y отсчитывается от низа
+export interface OpeningSlot {
+  x0: number;
+  y0: number;
+  x1: number;
+  y1: number;
+  // Где лежит створка секции; без owner секцию можно только проверить
+  owner?: Obj;
+  key?: string;
+  stvorka?: Obj;
 }

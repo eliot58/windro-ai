@@ -1,0 +1,146 @@
+{
+  "orderItems": [
+    {
+      "constructionType": "Окно",
+      "profileName": "Brusbox Super 70",
+      "furnitureName": "Roto NX",
+      "fill": "4x14x4TopNx14x4Кал.",
+      "qu": 1,
+      "width": 1260,
+      "height": 1800,
+      "colorIn": "W",
+      "colorOut": "W",
+      "hImposts": [
+        {
+          "y": 1300,
+          "bottomImposts": [
+            {
+              "x": 630
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "constructionType": "Окно",
+      "profileName": "Brusbox Super 70",
+      "furnitureName": "Roto NX",
+      "fill": "4x14x4TopNx14x4Кал.",
+      "qu": 1,
+      "width": 2050,
+      "height": 1800,
+      "colorIn": "W",
+      "colorOut": "W",
+      "hImposts": [
+        {
+          "y": 1300,
+          "bottomImposts": [
+            {
+              "x": 683
+            },
+            {
+              "x": 1367
+            }
+          ],
+          "topImposts": [
+            {
+              "x": 1025
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "constructionType": "Окно",
+      "profileName": "Brusbox Super 70",
+      "furnitureName": "Roto NX",
+      "fill": "4x14x4TopNx14x4Кал.",
+      "qu": 1,
+      "width": 1070,
+      "height": 1830,
+      "colorIn": "W",
+      "colorOut": "W",
+      "hImposts": [
+        {
+          "y": 1330
+        }
+      ]
+    },
+    {
+      "constructionType": "Окно",
+      "profileName": "Brusbox Super 70",
+      "furnitureName": "Roto NX",
+      "fill": "4x14x4TopNx14x4Кал.",
+      "qu": 1,
+      "width": 2100,
+      "height": 2100,
+      "colorIn": "W",
+      "colorOut": "W",
+      "vImposts": [
+        {
+          "x": 700
+        },
+        {
+          "x": 1400,
+          "rightStvorka": {
+            "openType": "povOtk",
+            "openSide": "right"
+          }
+        }
+      ]
+    },
+    {
+      "constructionType": "Окно",
+      "profileName": "Brusbox Super 70",
+      "furnitureName": "Roto NX",
+      "fill": "4x14x4 ГорNx14x4 кал.",
+      "qu": 1,
+      "width": 4270,
+      "height": 2100,
+      "colorIn": "W",
+      "colorOut": "W",
+      "hImposts": [
+        {
+          "y": 500,
+          "topImposts": [
+            {
+              "x": 712,
+              "leftStvorka": {
+                "openType": "pov",
+                "openSide": "left"
+              }
+            },
+            {
+              "x": 1424
+            },
+            {
+              "x": 2135
+            },
+            {
+              "x": 2847,
+              "leftStvorka": {
+                "openType": "pov",
+                "openSide": "right"
+              }
+            },
+            {
+              "x": 3559,
+              "rightStvorka": {
+                "openType": "pov",
+                "openSide": "right"
+              }
+            }
+          ],
+          "bottomImposts": [
+            {
+              "x": 1423
+            },
+            {
+              "x": 2847
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

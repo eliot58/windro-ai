@@ -1,0 +1,71 @@
+{
+  "orderItems": [
+    {
+      "constructionType": "Окно",
+      "profileName": "Rehau 60",
+      "furnitureName": "ROTO",
+      "fill": "4-24-4",
+      "qu": 1,
+      "width": 2640,
+      "height": 1150,
+      "colorIn": "W",
+      "colorOut": "W",
+      "vImposts": [
+        {
+          "x": 880,
+          "leftStvorka": {
+            "openType": "povOtk",
+            "openSide": "left",
+            "isMoskit": true
+          }
+        },
+        {
+          "x": 1760,
+          "rightStvorka": {
+            "openType": "povOtk",
+            "openSide": "right",
+            "isMoskit": true
+          }
+        }
+      ]
+    },
+    {
+      "constructionType": "Окно",
+      "profileName": "Rehau 60",
+      "furnitureName": "ROTO",
+      "fill": "4-24-4",
+      "qu": 1,
+      "width": 1240,
+      "height": 1150,
+      "colorIn": "W",
+      "colorOut": "W"
+    },
+    {
+      "constructionType": "Балконная дверь",
+      "profileName": "Rehau 60",
+      "furnitureName": "ROTO",
+      "fill": "4-24-4",
+      "qu": 1,
+      "width": 960,
+      "height": 2050,
+      "colorIn": "W",
+      "colorOut": "W",
+      "stvorka": {
+        "openType": "pov",
+        "openSide": "left",
+        "hImposts": [
+          {
+            "y": 900,
+            "bottomFill": "S",
+            "bottomFillParam": {
+              "marking": "S",
+              "colorIn": "W",
+              "colorOut": "W"
+            }
+          }
+        ]
+      }
+    }
+  ],
+  "addOrderitems": []
+}

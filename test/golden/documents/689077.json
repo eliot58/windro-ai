@@ -1,0 +1,25 @@
+{
+  "orderItems": [
+    {
+      "constructionType": "Окно",
+      "profileName": "Grazio 63",
+      "furnitureName": "VORNE",
+      "fill": "4-14-4-14-4И",
+      "qu": 1,
+      "width": 1170,
+      "height": 1150,
+      "colorIn": "W",
+      "colorOut": "Тем.коричн.02.11.81.000101-1167",
+      "vImposts": [
+        {
+          "x": 585,
+          "rightStvorka": {
+            "openType": "povOtk",
+            "openSide": "right",
+            "isMoskit": true
+          }
+        }
+      ]
+    }
+  ]
+}

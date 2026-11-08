@@ -1,0 +1,15 @@
+{
+    "orderItems": [
+    {
+    "constructionType": "Дверь входная открывание наружу",
+    "profileName": "Delight", 
+    "furnitureName": "Двери (Вх.группа)", 
+    "fill": "4м1-14-4м1-14-4м1", 
+    "qu": 1, 
+    "width": 890, 
+    "height": 2140, 
+    "colorIn": "W",
+    "colorOut": "02.11.71.000041-116700 Антрацитово-серый 7016",
+    "stvorka":{"openType": "pov", "openSide": "right"}
+    }]
+}

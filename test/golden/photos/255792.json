@@ -1,0 +1,36 @@
+{
+  "orderItems": [
+    {
+      "constructionType": "Окно",
+      "profileName": "Blitz NEW-60",
+      "furnitureName": "FUTURUSS",
+      "fill": "4М1-16-4М1",
+      "qu": 1,
+      "width": 1690,
+      "height": 660,
+      "colorIn": "серый",
+      "colorOut": "серый",
+      "vImposts": [
+        {
+          "x": 845
+        }
+      ]
+    },
+    {
+      "constructionType": "Окно",
+      "profileName": "Blitz NEW-60",
+      "furnitureName": "FUTURUSS",
+      "fill": "4М1-16-4М1",
+      "qu": 1,
+      "width": 1720,
+      "height": 660,
+      "colorIn": "серый",
+      "colorOut": "серый",
+      "vImposts": [
+        {
+          "x": 860
+        }
+      ]
+    }
+  ]
+}
