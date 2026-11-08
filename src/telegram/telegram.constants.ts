@@ -9,3 +9,10 @@ export const MIN_WINDOW_SIZE = 300;
 export const SEND_ATTEMPTS = 3;
 
 export const RETRY_DELAY_MS = 3_000;
+
+// Меню команд в Telegram, ставится при старте
+export const BOT_COMMANDS = [
+  { command: 'start', description: 'Начать работу' },
+  { command: 'logout', description: 'Выйти и сменить код продавца' },
+  { command: 'help', description: 'Что умеет бот' },
+];

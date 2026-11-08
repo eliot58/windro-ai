@@ -4,7 +4,7 @@ import { Bot } from 'grammy';
 
 import telegramConfig from '../config/telegram.config';
 import { TelegramCommandHandler } from './telegram-command.handler';
-import { TELEGRAM_BOT } from './telegram.constants';
+import { BOT_COMMANDS, TELEGRAM_BOT } from './telegram.constants';
 
 @Injectable()
 export class TelegramWebhookSetup implements OnModuleInit {
@@ -15,9 +15,10 @@ export class TelegramWebhookSetup implements OnModuleInit {
     private readonly commandHandler: TelegramCommandHandler,
   ) {}
 
-  // Регистрируем команды и при каждом старте заново ставим вебхук
+  // Регистрируем команды, меню команд и при каждом старте заново ставим вебхук
   async onModuleInit() {
     this.commandHandler.register(this.bot);
+    await this.bot.api.setMyCommands(BOT_COMMANDS);
 
     await this.bot.api.setWebhook(this.config.webhookUrl, {
       secret_token: this.config.webhookSecret,

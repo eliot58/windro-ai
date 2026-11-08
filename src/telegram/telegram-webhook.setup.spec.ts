@@ -2,7 +2,12 @@ import { TelegramWebhookSetup } from './telegram-webhook.setup';
 
 describe('TelegramWebhookSetup', () => {
   it('registers commands and sets the webhook', async () => {
-    const bot = { api: { setWebhook: jest.fn().mockResolvedValue(true) } };
+    const bot = {
+      api: {
+        setWebhook: jest.fn().mockResolvedValue(true),
+        setMyCommands: jest.fn().mockResolvedValue(true),
+      },
+    };
     const commands = { register: jest.fn() };
     const config = {
       webhookUrl: 'https://api.example.com/api/v1/telegram/webhook',
@@ -16,6 +21,7 @@ describe('TelegramWebhookSetup', () => {
     ).onModuleInit();
 
     expect(commands.register).toHaveBeenCalledWith(bot);
+    expect(bot.api.setMyCommands).toHaveBeenCalled();
     expect(bot.api.setWebhook).toHaveBeenCalledWith(
       'https://api.example.com/api/v1/telegram/webhook',
       {

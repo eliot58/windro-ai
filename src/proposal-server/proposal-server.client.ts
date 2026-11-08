@@ -34,7 +34,12 @@ export class ProposalServerClient {
           url: this.config.webhookUrl,
         }),
       );
-      if (status === 200 || status === 202) return { status: 'accepted' };
+      if (status === 200 || status === 202) {
+        this.logger.log(
+          `КП заказано: продавец ${sellerCode}, изделий ${orderItems.length}, ответ придёт на ${this.config.webhookUrl}`,
+        );
+        return { status: 'accepted' };
+      }
       this.logger.error(`Сервер КП вернул статус ${status}`);
       return {
         status: 'failed',

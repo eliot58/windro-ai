@@ -100,6 +100,21 @@ describe('App (e2e)', () => {
       expect(res.statusCode).toBe(401);
     });
 
+    it('answers 200 when a handler fails', async () => {
+      prisma.user.findUnique = () => Promise.reject(new Error('db is down'));
+      const res = await postUpdate(commandUpdate('/start'));
+      expect(res.statusCode).toBe(200);
+    });
+
+    it('answers /help and unknown commands with help', async () => {
+      await postUpdate(commandUpdate('/help'));
+      await postUpdate(commandUpdate('/foo'));
+      expect(texts()).toHaveLength(2);
+      expect(texts().every((text) => text.includes('Что умеет бот'))).toBe(
+        true,
+      );
+    });
+
     it('ignores group chats', async () => {
       await postUpdate(
         commandUpdate('/start', { id: -1, type: 'group', title: 'G' }),

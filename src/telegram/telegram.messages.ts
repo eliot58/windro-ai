@@ -34,6 +34,17 @@ export const LOGOUT_MESSAGE = [
   '',
   'Чтобы вернуться, отправьте /start.',
 ].join('\n');
+export const HELP_MESSAGE = [
+  'ℹ️ <b>Что умеет бот</b>',
+  '',
+  'Распознаёт заявку на окна и присылает коммерческое предложение.',
+  'Подойдёт PDF, DOCX, DOC или фото бланка.',
+  '',
+  '<b>Команды</b>',
+  '/start — начать работу',
+  '/logout — выйти и сменить код продавца',
+  '/help — эта справка',
+].join('\n');
 export const PROCESSING_MESSAGE = '⏳ Обрабатываю заявку...';
 export const PROCESSING_ERROR_MESSAGE =
   '❌ Не удалось обработать заявку. Попробуйте ещё раз.';

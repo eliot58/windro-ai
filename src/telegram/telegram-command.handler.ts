@@ -6,6 +6,7 @@ import { UsersService } from '../users/users.service';
 import {
   ACTIVATED_MESSAGE,
   BAD_SELLER_CODE_MESSAGE,
+  HELP_MESSAGE,
   LOGOUT_MESSAGE,
   SEND_ORDER_MESSAGE,
   WELCOME_MESSAGE,
@@ -32,6 +33,11 @@ export class TelegramCommandHandler {
       .chatType('private');
     chats.command('start', (ctx) => this.start(ctx));
     chats.command('logout', (ctx) => this.logout(ctx));
+    chats.command('help', (ctx) => replyTo(ctx, HELP_MESSAGE));
+    // Незнакомая команда — не код продавца, иначе /help и опечатки дают «Неверный формат»
+    chats.on('message:entities:bot_command', (ctx) =>
+      replyTo(ctx, HELP_MESSAGE),
+    );
     chats.on('message:document', (ctx) =>
       this.orderHandler.handleDocument(ctx),
     );
