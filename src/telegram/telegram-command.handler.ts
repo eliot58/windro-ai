@@ -23,12 +23,13 @@ export class TelegramCommandHandler {
   ) {}
 
   register(bot: Bot) {
-    // Без обработчика ошибка ушла бы в вебхук, и Telegram повторял бы то же обновление
-    bot.catch(({ error }) => {
-      this.logger.error(`Ошибка обработки обновления: ${String(error)}`);
-    });
-
-    const chats = bot.chatType('private');
+    // bot.catch работает только при polling. При вебхуке ошибка ушла бы в Nest:
+    // он записал бы в лог контекст вместе с токеном, а Telegram повторял бы обновление
+    const chats = bot
+      .errorBoundary(({ error }) => {
+        this.logger.error(`Ошибка обработки обновления: ${String(error)}`);
+      })
+      .chatType('private');
     chats.command('start', (ctx) => this.start(ctx));
     chats.command('logout', (ctx) => this.logout(ctx));
     chats.on('message:document', (ctx) =>
