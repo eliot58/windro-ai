@@ -13,6 +13,9 @@ import { PROPOSAL_TIMEOUT_MS } from './proposal-server.constants';
       useFactory: ({ url }: ConfigType<typeof proposalServerConfig>) => ({
         baseURL: url,
         timeout: PROPOSAL_TIMEOUT_MS,
+        // Сервер КП читает тело как строку и сохраняет в файл: без явной кодировки
+        // кириллица может побиться
+        headers: { 'Content-Type': 'application/json; charset=utf-8' },
         // Статус разбирает клиент: ошибка сервера КП не должна быть исключением
         validateStatus: () => true,
       }),
