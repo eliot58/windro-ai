@@ -29,4 +29,5 @@ export const configSchema = Joi.object({
 
   // Без адреса сервера КП пользователь получает только распознанный JSON
   PROPOSAL_SERVER_URL: Joi.string().uri().optional(),
+  PROPOSAL_WEBHOOK_URL: Joi.string().uri().optional(),
 });
