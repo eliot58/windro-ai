@@ -1,0 +1,48 @@
+{
+  "orderItems": [
+    {
+      "constructionType": "Окно",
+      "profileName": "60 Reachmont",
+      "furnitureName": "Roto NT",
+      "fill": "4м1-10-4м1-10-4м1",
+      "qu": 2,
+      "width": 2620,
+      "height": 1270,
+      "colorIn": "W",
+      "colorOut": "W",
+      "vImposts": [
+        {"x": 610},
+        {
+          "x": 1310,
+          "leftStvorka": {"openType": "pov", "openSide": "left"}
+        },
+        {
+          "x": 2010,
+          "leftStvorka": {"openType": "povOtk", "openSide": "right"}
+        }
+      ]
+    },
+    {
+      "constructionType": "Окно",
+      "profileName": "60 Reachmont",
+      "furnitureName": "Roto NT",
+      "fill": "4м1-10-4м1-10-4м1",
+      "qu": 1,
+      "width": 2720,
+      "height": 1270,
+      "colorIn": "W",
+      "colorOut": "W",
+      "vImposts": [
+        {"x": 660},
+        {
+          "x": 1360,
+          "leftStvorka": {"openType": "pov", "openSide": "left"}
+        },
+        {
+          "x": 2060,
+          "leftStvorka": {"openType": "povOtk", "openSide": "right"}
+        }
+      ]
+    }
+  ]
+}

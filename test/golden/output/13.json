@@ -1,0 +1,42 @@
+{
+  "orderItems": [
+    {
+      "constructionType": "Окно",
+      "profileName": "Блиц 60",
+      "furnitureName": "VORNE",
+      "fill": "S",
+      "fillParam": {
+        "marking": "S",
+        "colorIn": "W",
+        "colorOut": "W"
+      },
+      "qu": 1,
+      "width": 1000,
+      "height": 1500,
+      "colorIn": "W",
+      "colorOut": "W"
+    },
+    {
+      "constructionType": "Окно",
+      "profileName": "Блиц 60",
+      "furnitureName": "VORNE",
+      "fill": "4-10-4-10-4",
+      "qu": 1,
+      "width": 1000,
+      "height": 1500,
+      "colorIn": "W",
+      "colorOut": "W",
+      "stvorka": {
+        "openType": "povOtk",
+        "openSide": "left",
+        "fill": "S",
+        "fillParam": {
+          "marking": "S",
+          "colorIn": "W",
+          "colorOut": "W"
+        }
+      }
+    }
+  ],
+  "addOrderitems": []
+}

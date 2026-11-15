@@ -1,0 +1,17 @@
+{
+    "orderItems": 
+    [
+        {
+            "constructionType": "Балконная дверь",
+            "profileName": "Melke Evolution 70 Белый", 
+            "furnitureName": "Roto NX",
+            "fill": "4/14/4/14/4",
+            "qu": 5, 
+            "width": 880, 
+            "height": 2493, 
+            "colorIn": "W", 
+            "colorOut": "W",
+            "stvorka":{"openType": "pov", "openSide": "left", "hImposts":[{"y":549}]}
+        }
+    ]
+}

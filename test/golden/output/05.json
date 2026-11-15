@@ -1,0 +1,15 @@
+{
+  "orderItems": [
+    {   "constructionType": "Дверь входная открывание наружу",
+        "profileName": "70 Brusbox", 
+        "furnitureName": "Двери (Вх.группа)", 
+        "fill": "4М1-14-4М1-14-4М1", 
+        "qu": 1, 
+        "width": 950, 
+        "height": 2100, 
+        "colorIn": "W",
+        "colorOut": "W",
+        "stvorka":{"openType": "pov", "openSide": "left", "hImposts":[{"y":700}]}
+    }
+  ]
+}

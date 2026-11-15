@@ -1,0 +1,47 @@
+{
+  "orderItems": [
+    {
+      "constructionType": "Окно",
+      "profileName": "Рехау 70",
+      "furnitureName": "VORNE",
+      "fill": "2хкам",
+      "qu": 1,
+      "width": 3000,
+      "height": 1570,
+      "colorIn": "W",
+      "colorOut": "W",
+      "vImposts": [
+        {
+          "x": 750,
+          "leftFill": "S",
+          "leftFillParam": {
+            "marking": "S",
+            "colorIn": "W",
+            "colorOut": "W"
+          }
+        },
+        {
+          "x": 1500,
+          "leftStvorka": {
+            "openType": "povOtk",
+            "openSide": "left"
+          }
+        },
+        {
+          "x": 2250,
+          "leftStvorka": {
+            "openType": "pov",
+            "openSide": "right"
+          },
+          "rightFill": "S",
+          "rightFillParam": {
+            "marking": "S",
+            "colorIn": "W",
+            "colorOut": "W"
+          }
+        }
+      ]
+    }
+  ],
+  "addOrderitems": []
+}

@@ -1,0 +1,27 @@
+{
+  "orderItems": [
+    {
+        "constructionType": "Дверь входная открывание наружу",
+        "profileName": "REHAU T116/70", 
+        "furnitureName": "Наж.гар.DR 35", 
+        "fill": "40мм 6Energy Light/14/4/12/4LowE",
+        "qu": 1, 
+        "width": 885, 
+        "height": 2100, 
+        "colorIn": "серый",
+        "colorOut": "серый",
+        "stvorka":{"openType": "pov", "openSide": "right"}
+    },
+    {
+        "constructionType": "Дверь входная открывание наружу",
+        "profileName": "REHAU T116/70",
+        "furnitureName": "Наж.гар.DR 35",
+        "fill": "40мм 6Energy Light/14/4/12/4LowE",
+        "qu": 3,
+        "width": 860,
+        "height": 2090,
+        "colorIn": "серый",
+        "colorOut": "серый", 
+        "stvorka":{"openType": "pov", "openSide": "left"}}
+  ]
+}
