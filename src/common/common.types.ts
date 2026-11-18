@@ -1,4 +1,4 @@
 export interface SubmittedForm {
   fields: Record<string, string>;
-  file?: { name: string; content: Buffer };
+  file?: { name: string; mimeType: string; content: Buffer };
 }

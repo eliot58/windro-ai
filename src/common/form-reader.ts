@@ -23,7 +23,11 @@ export async function readForm(
   try {
     for await (const part of request.parts()) {
       if (part.type === 'file') {
-        form.file = { name: part.filename, content: await part.toBuffer() };
+        form.file = {
+          name: part.filename,
+          mimeType: part.mimetype,
+          content: await part.toBuffer(),
+        };
       } else {
         form.fields[part.fieldname] = String(part.value);
       }

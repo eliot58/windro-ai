@@ -1,18 +1,23 @@
-export const REQUEST_TTL_MS = 30 * 60 * 1000;
-
 export const CALLBACK_TIMEOUT_MS = 30_000;
 
+// Расширение по типу файла: фронтенд может прислать файл без расширения в имени
+export const MIME_EXTENSIONS: Record<string, string> = {
+  'application/pdf': '.pdf',
+  'application/msword': '.doc',
+  'application/vnd.openxmlformats-officedocument.wordprocessingml.document':
+    '.docx',
+  'image/jpeg': '.jpg',
+  'image/pjpeg': '.jpg',
+  'image/png': '.png',
+  'image/webp': '.webp',
+};
+
 export const FILE_REQUIRED_MESSAGE = 'Файл не передан.';
-export const DOCUMENT_FORMAT_MESSAGE =
-  'Формат не поддерживается. Нужен PDF, DOCX или DOC.';
-export const PHOTO_FORMAT_MESSAGE =
-  'Формат не поддерживается. Нужно фото JPG, PNG, BMP или WEBP.';
+export const UNSUPPORTED_FORMAT_MESSAGE =
+  'Формат не поддерживается. Нужен PDF, DOC, DOCX, JPG, PNG или WEBP.';
 export const BAD_CALLBACK_URL_MESSAGE =
-  'callbackUrl должен начинаться с http:// или https://.';
-export const REQUEST_NOT_FOUND_MESSAGE = 'Запрос не найден.';
+  'callback_url должен начинаться с http:// или https://.';
 export const INTERNAL_ERROR_MESSAGE = 'Не удалось обработать заявку.';
-export const PROPOSAL_DISABLED_MESSAGE =
-  'Сервер КП не настроен, отправлены только распознанные данные.';
 
 export const notRecognizedMessage = (reason: string) =>
   `Не удалось распознать заявку: ${reason}.`;

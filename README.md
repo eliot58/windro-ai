@@ -1,16 +1,18 @@
 # Windro API
 
-Telegram-бот и HTTP API: принимают заявку на окна (PDF, DOCX, DOC или фото бланка),
-распознают её через Gemini и заказывают коммерческое предложение на сервере КП.
+Telegram-бот и HTTP API: принимают заявку на окна (PDF, DOCX, DOC или фото бланка)
+и распознают её через Gemini. Бот дальше сам заказывает коммерческое предложение на сервере КП,
+HTTP API возвращает распознанные данные на `callback_url`.
 
 ## Как это работает
 
-1. Файл приходит в бот или в `POST /api/v1/orders/proposal/document`.
+1. Файл приходит в бот или в `POST /api/v1/recognitions`.
 2. `DocumentReader` превращает документ в картинки блоков «чертёж + таблица».
 3. Gemini через OpenRouter возвращает JSON с изделиями.
 4. Правила нормализуют значения, валидатор проверяет схему сервера КП. Найденные ошибки
    уходят обратно модели, после трёх попыток подключается запасная модель.
-5. Изделия уходят на сервер КП, а готовый PDF приходит на `/api/v1/proposals/webhook`.
+5. Из бота изделия уходят на сервер КП, а готовый PDF приходит на `/api/v1/proposals/webhook`.
+   Из HTTP API изделия уходят на `callback_url`.
 
 Открывания на чертежах документов проверяет локальная модель `recognition/models/opening-classifier.onnx`.
 Москитки и дополнительные изделия берутся из текста документа.
@@ -27,8 +29,7 @@ npx prisma migrate deploy
 npm run start:dev
 ```
 
-Вебхуку Telegram нужен публичный HTTPS-адрес в `PUBLIC_URL`. Swagger открывается на `/docs`
-в режиме development.
+Вебхуку Telegram нужен публичный HTTPS-адрес в `PUBLIC_URL`. Swagger открывается на `/api/v1/docs`.
 
 ## HTTP API
 
@@ -36,21 +37,18 @@ npm run start:dev
 
 | Метод | Адрес | Назначение |
 |---|---|---|
-| POST | `/orders/proposal/document` | документ, распознавание и КП |
-| POST | `/orders/proposal/photo` | фото бланка, распознавание и КП |
-| POST | `/orders/recognize/document` | документ, только распознавание |
-| POST | `/orders/recognize/photo` | фото бланка, только распознавание |
-| GET | `/orders/:requestId` | статус запроса |
+| POST | `/recognitions` | распознать заявку, результат придёт на `callback_url` |
 | POST | `/proposals/webhook` | готовый PDF от сервера КП |
 | POST | `/telegram/webhook` | обновления Telegram |
 
-Адреса `/orders` требуют заголовок `x-api-key` со значением `API_KEY`.
+`/recognitions` требует заголовок `x-api-key` со значением `API_KEY`.
 Вебхук Telegram проверяет свой секрет. Вебхук КП открыт: сервер КП не умеет слать заголовки,
 его адрес передаётся в каждом заказе в поле `url`.
 
-Запросы `/orders` принимают `multipart/form-data` с полями `file`, `callbackUrl`, `sellerCode`.
-Ответ `202` содержит `requestId`, результат приходит POST-запросом на `callbackUrl`.
-Ошибки приходят со статусами `400` и `404` в виде `{ code, message }`: `code` для логики клиента, `message` на русском для пользователя. Схемы ответов описаны в Swagger.
+`/recognitions` принимает `multipart/form-data` с полями `file` и `callback_url` (`seller_code` можно передать, он не используется).
+Ответ `202`: `{ status: "accepted", request_id }`. Результат приходит POST-запросом с JSON на `callback_url`:
+`{ request_id, status: "completed", orderItems, addOrderitems? }` или `{ request_id, status: "error", error_type, message }`.
+Ошибки запроса приходят со статусами `400` и `401` в виде `{ code, message }`. Схемы описаны в Swagger.
 
 ## Проверки
 

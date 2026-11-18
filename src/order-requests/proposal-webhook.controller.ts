@@ -3,7 +3,6 @@ import {
   Controller,
   HttpCode,
   Logger,
-  NotFoundException,
   Post,
   Req,
 } from '@nestjs/common';
@@ -21,17 +20,14 @@ import {
 } from '../telegram/telegram.messages';
 import { TelegramNotifier } from '../telegram/telegram.notifier';
 import { UsersService } from '../users/users.service';
-import { OrderRequestsService } from './order-requests.service';
 
-// Сервер КП присылает сюда готовый PDF. sellerCode из ожидающего запроса фронтенда
-// ведёт на его callback, код XXXX-XXXX ведёт к пользователю Telegram
+// Сервер КП присылает сюда готовый PDF для пользователей Telegram с этим кодом продавца
 @ApiExcludeController()
 @Controller('proposals/webhook')
 export class ProposalWebhookController {
   private readonly logger = new Logger(ProposalWebhookController.name);
 
   constructor(
-    private readonly orderRequests: OrderRequestsService,
     private readonly users: UsersService,
     private readonly notifier: TelegramNotifier,
   ) {}
@@ -41,12 +37,10 @@ export class ProposalWebhookController {
   async receive(@Req() request: FastifyRequest) {
     const form = await readForm(request);
     const sellerCode = form.fields.sellerCode ?? '';
-    const pendingId = this.orderRequests.findIdBySellerCode(sellerCode);
-
-    if (!pendingId && SELLER_CODE.test(sellerCode)) {
-      return this.toTelegram(sellerCode, form);
+    if (!SELLER_CODE.test(sellerCode)) {
+      throw new BadRequestException('Invalid sellerCode in webhook');
     }
-    return this.toFrontend(pendingId ?? sellerCode, form);
+    return this.toTelegram(sellerCode, form);
   }
 
   // Код продавца могут использовать несколько человек, КП получают все
@@ -91,27 +85,5 @@ export class ProposalWebhookController {
       await this.notifier.sendMessage(chatId, PROPOSAL_SEND_ERROR_MESSAGE);
       throw error;
     }
-  }
-
-  private async toFrontend(requestId: string, { fields, file }: SubmittedForm) {
-    if (!this.orderRequests.get(requestId)) {
-      throw new NotFoundException(`Request ${requestId} not found or expired`);
-    }
-
-    const message = fields.message ?? PROPOSAL_READY_MESSAGE;
-    if (fields.status === 'success' && file) {
-      await this.orderRequests.deliverProposal(
-        requestId,
-        file.content,
-        message,
-      );
-    } else {
-      await this.orderRequests.sendError(
-        requestId,
-        'kp_generation_error',
-        message,
-      );
-    }
-    return { status: 'ok' };
   }
 }

@@ -29,26 +29,33 @@ async function bootstrap() {
 
   const cfg = app.get<ConfigType<typeof appConfig>>(appConfig.KEY);
 
-  const isDev = cfg.nodeEnv === 'development';
+  // Документация открыта и на проде: по ней подключается фронтенд, а сами
+  // эндпойнты закрыты ключом API
+  const config = new DocumentBuilder()
+    .setTitle('Windro API')
+    .setDescription(
+      [
+        'Распознавание заявок на окна: PDF, DOC, DOCX и фото рукописных бланков.',
+        '',
+        'Все запросы требуют заголовок `x-api-key`. Нажмите **Authorize** и вставьте ключ.',
+      ].join('\n'),
+    )
+    .setVersion('1.0')
+    .addApiKey(
+      { type: 'apiKey', name: API_KEY_HEADER, in: 'header' },
+      API_KEY_SECURITY,
+    )
+    .build();
 
-  if (isDev) {
-    const config = new DocumentBuilder()
-      .setTitle('Windro API')
-      .setDescription(
-        'Распознавание заявок на окна и заказ коммерческих предложений',
-      )
-      .setVersion('1.0')
-      .addApiKey(
-        { type: 'apiKey', name: API_KEY_HEADER, in: 'header' },
-        API_KEY_SECURITY,
-      )
-      .build();
-
-    const doc = () => SwaggerModule.createDocument(app, config);
-    SwaggerModule.setup('docs', app, doc, {
+  SwaggerModule.setup(
+    'docs',
+    app,
+    () => SwaggerModule.createDocument(app, config),
+    {
+      useGlobalPrefix: true,
       swaggerOptions: { persistAuthorization: true },
-    });
-  }
+    },
+  );
 
   app.enableShutdownHooks([], { useProcessExit: true });
   await app.listen(cfg.port, '0.0.0.0');

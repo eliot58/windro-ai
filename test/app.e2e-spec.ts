@@ -304,22 +304,32 @@ describe('App (e2e)', () => {
       });
     });
 
-    it('returns 404 for an unknown frontend request', async () => {
+    it('rejects a webhook without a seller code', async () => {
       const res = await receive({ sellerCode: 'nope', status: 'success' });
-      expect(res.statusCode).toBe(404);
+      expect(res.statusCode).toBe(400);
     });
   });
 
-  describe('API key', () => {
-    const upload = () =>
-      multipart({ callbackUrl: CALLBACK_URL }, { name: 'a.pdf', content: 'x' });
+  const RECOGNITIONS = `${API}/recognitions`;
+  const submit = (
+    name = 'order.pdf',
+    fields: Record<string, string> = { callback_url: CALLBACK_URL },
+  ) =>
+    app.inject({
+      method: 'POST',
+      url: RECOGNITIONS,
+      ...multipart(fields, { name, content: 'data' }),
+    });
 
-    it('rejects an order request without a key', async () => {
-      const url = `${API}/orders/recognize/document`;
-      const { headers, payload } = upload();
+  describe('API key', () => {
+    it('rejects a request without a key', async () => {
+      const { headers, payload } = multipart(
+        { callback_url: CALLBACK_URL },
+        { name: 'a.pdf', content: 'x' },
+      );
       const res = await app.inject({
         method: 'POST',
-        url,
+        url: RECOGNITIONS,
         headers: { 'content-type': headers['content-type'] },
         payload,
       });
@@ -334,7 +344,8 @@ describe('App (e2e)', () => {
 
     it('rejects a wrong key', async () => {
       const res = await app.inject({
-        url: `${API}/orders/some-id`,
+        method: 'POST',
+        url: RECOGNITIONS,
         headers: { 'x-api-key': 'wrong' },
       });
       expect(res.statusCode).toBe(401);
@@ -351,76 +362,70 @@ describe('App (e2e)', () => {
     expect(res.statusCode).not.toBe(401);
   });
 
-  describe('frontend API', () => {
-    const submit = (url: string, name = 'order.pdf', callback = CALLBACK_URL) =>
-      app.inject({
-        method: 'POST',
-        url,
-        ...multipart(
-          { callbackUrl: callback, sellerCode: '1111-2222' },
-          { name, content: 'data' },
-        ),
+  describe('recognitions', () => {
+    it('sends recognized items to the callback', async () => {
+      const res = await submit('order.pdf', {
+        callback_url: CALLBACK_URL,
+        seller_code: '1111-2222',
       });
-
-    it('sends recognized items to the callback without a proposal', async () => {
-      const res = await submit(`${API}/orders/recognize/document`);
       expect(res.statusCode).toBe(202);
-      expect(Object.keys(res.json<object>())).toEqual(['requestId']);
+      const { status, request_id } = res.json<{
+        status: string;
+        request_id: string;
+      }>();
+      expect(status).toBe('accepted');
 
       await until(() => post.mock.calls.length > 0);
       expect(post.mock.calls[0][0]).toBe(CALLBACK_URL);
-      expect(post.mock.calls[0][1]).toMatchObject({
+      expect(post.mock.calls[0][1]).toEqual({
+        request_id,
         status: 'completed',
         orderItems: ORDER_ITEMS,
       });
-      expect(proposalServer.send).not.toHaveBeenCalled();
+      expect(recognition.recognize.mock.calls[0][0]).toMatchObject({
+        kind: 'document',
+        extension: '.pdf',
+      });
     });
 
-    it('waits for the PDF and forwards it to the callback', async () => {
-      const res = await submit(`${API}/orders/proposal/document`);
-      const { requestId } = res.json<{ requestId: string }>();
-      await until(() => proposalServer.send.mock.calls.length > 0);
-
-      const status = await app.inject({
-        url: `${API}/orders/${requestId}`,
-        headers: AUTH,
+    it('recognizes images as photos', async () => {
+      await submit('photo.webp');
+      await until(() => recognition.recognize.mock.calls.length > 0);
+      expect(recognition.recognize.mock.calls[0][0]).toMatchObject({
+        kind: 'photo',
       });
-      expect(status.json()).toMatchObject({
-        status: 'processing',
-        hasOrderItems: true,
-      });
+    });
 
-      await app.inject({
+    it('detects the format by content type when the name has no extension', async () => {
+      const boundary = 'b';
+      const payload =
+        `--${boundary}\r\nContent-Disposition: form-data; name="callback_url"\r\n\r\n${CALLBACK_URL}\r\n` +
+        `--${boundary}\r\nContent-Disposition: form-data; name="file"; filename="blob"\r\nContent-Type: application/vnd.openxmlformats-officedocument.wordprocessingml.document\r\n\r\ndata\r\n` +
+        `--${boundary}--\r\n`;
+      const res = await app.inject({
         method: 'POST',
-        url: `${API}/proposals/webhook`,
-        ...multipart(
-          { sellerCode: '1111-2222', status: 'success' },
-          { name: 'kp.pdf', content: '%PDF' },
-        ),
+        url: RECOGNITIONS,
+        headers: {
+          ...AUTH,
+          'content-type': `multipart/form-data; boundary=${boundary}`,
+        },
+        payload,
       });
-      await until(() => post.mock.calls.length > 0);
-      const form = post.mock.calls[0][1] as unknown as FormData;
-      expect(form.get('status')).toBe('completed');
-      expect(form.get('file')).toBeInstanceOf(Blob);
-
-      const done = await app.inject({
-        url: `${API}/orders/${requestId}`,
-        headers: AUTH,
+      expect(res.statusCode).toBe(202);
+      await until(() => recognition.recognize.mock.calls.length > 0);
+      expect(recognition.recognize.mock.calls[0][0]).toMatchObject({
+        kind: 'document',
+        extension: '.docx',
       });
-      expect(done.statusCode).toBe(404);
-      expect(done.json()).toMatchObject({ code: 'request_not_found' });
     });
 
-    it('reports a proposal server error to the callback', async () => {
-      proposalServer.send.mockResolvedValue({
-        status: 'failed',
-        reason: 'down',
-      });
-      await submit(`${API}/orders/proposal/document`);
-      await until(() => post.mock.calls.length > 0);
-      expect(post.mock.calls[0][1]).toMatchObject({
-        status: 'error',
-        errorType: 'kp_server_error',
+    it('rejects an unsupported format', async () => {
+      const res = await submit('order.txt');
+      expect(res.statusCode).toBe(400);
+      expect(res.json()).toEqual({
+        code: 'unsupported_format',
+        message:
+          'Формат не поддерживается. Нужен PDF, DOC, DOCX, JPG, PNG или WEBP.',
       });
     });
 
@@ -428,43 +433,30 @@ describe('App (e2e)', () => {
       recognition.recognize.mockRejectedValue(
         new RecognitionError('нет блоков'),
       );
-      await submit(`${API}/orders/recognize/document`);
+      await submit();
       await until(() => post.mock.calls.length > 0);
       expect(post.mock.calls[0][1]).toMatchObject({
-        errorType: 'pipeline_error',
+        status: 'error',
+        error_type: 'pipeline_error',
         message: 'Не удалось распознать заявку: нет блоков.',
       });
     });
 
     it('treats a file read failure as an internal error', async () => {
       recognition.recognize.mockRejectedValue(new Error('битый PDF'));
-      await submit(`${API}/orders/recognize/document`);
+      await submit();
       await until(() => post.mock.calls.length > 0);
       expect(post.mock.calls[0][1]).toMatchObject({
-        errorType: 'internal_error',
+        status: 'error',
+        error_type: 'internal_error',
         message: 'Не удалось обработать заявку.',
-      });
-    });
-
-    it('accepts only images for a photo proposal', async () => {
-      const bad = await submit(`${API}/orders/proposal/photo`, 'order.pdf');
-      expect(bad.statusCode).toBe(400);
-      expect(bad.json()).toEqual({
-        code: 'unsupported_format',
-        message: 'Формат не поддерживается. Нужно фото JPG, PNG, BMP или WEBP.',
-      });
-
-      await submit(`${API}/orders/proposal/photo`, 'photo.png');
-      await until(() => recognition.recognize.mock.calls.length > 0);
-      expect(recognition.recognize.mock.calls[0][0]).toMatchObject({
-        kind: 'photo',
       });
     });
 
     it('returns 400 for a non-multipart request', async () => {
       const res = await app.inject({
         method: 'POST',
-        url: `${API}/orders/recognize/document`,
+        url: RECOGNITIONS,
         headers: AUTH,
         payload: {},
       });
@@ -472,12 +464,8 @@ describe('App (e2e)', () => {
       expect(res.json()).toMatchObject({ code: 'multipart_required' });
     });
 
-    it('validates callbackUrl', async () => {
-      const res = await submit(
-        `${API}/orders/recognize/document`,
-        'order.pdf',
-        'ftp://x',
-      );
+    it('validates callback_url', async () => {
+      const res = await submit('order.pdf', { callback_url: 'ftp://x' });
       expect(res.statusCode).toBe(400);
       expect(res.json()).toMatchObject({ code: 'invalid_callback_url' });
     });

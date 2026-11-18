@@ -1,25 +1,8 @@
-import {
-  AdditionalItem,
-  OrderFile,
-  OrderItem,
-  RecognitionResult,
-} from '../recognition/recognition.types';
+import { OrderFile } from '../recognition/recognition.types';
 
-export interface OrderRequest {
-  callbackUrl: string;
-  sellerCode: string;
-  createdAt: number;
-  orderItems: OrderItem[];
-  addOrderitems: AdditionalItem[];
-}
-
-export interface OrderInput {
+export interface RecognitionInput {
   file: OrderFile;
   callbackUrl: string;
-  sellerCode: string;
 }
 
-export type RecognizedHandler = (
-  requestId: string,
-  result: RecognitionResult,
-) => Promise<void>;
+export type RecognitionErrorType = 'pipeline_error' | 'internal_error';
