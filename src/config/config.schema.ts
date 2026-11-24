@@ -8,6 +8,8 @@ export const configSchema = Joi.object({
   PUBLIC_URL: Joi.string().uri().required(),
   // openssl rand -hex 32
   API_KEY: Joi.string().hex().length(64).required(),
+  // Пароль страницы /admin/prompts. Без него страница закрыта
+  ADMIN_PASSWORD: Joi.string().min(12).optional(),
 
   // База данных
   DATABASE_URL: Joi.string()

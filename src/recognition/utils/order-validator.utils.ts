@@ -141,6 +141,17 @@ function validateStvorka(
     errors.push(`${prefix}: isMoskit не bool`);
   }
   errors.push(...validateFillFields(stvorka, ['fill'], [], prefix));
+  if ('parameters' in stvorka) {
+    const valid =
+      Array.isArray(stvorka.parameters) &&
+      (stvorka.parameters as unknown[]).every(
+        (entry) =>
+          isObject(entry) &&
+          typeof entry.name === 'string' &&
+          typeof entry.value === 'string',
+      );
+    if (!valid) errors.push(`${prefix}: parameters не список {name, value}`);
+  }
   if ('hImposts' in stvorka) {
     errors.push(
       ...validateHImposts(

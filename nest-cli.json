@@ -6,7 +6,8 @@
     "deleteOutDir": true,
     "assets": [
       { "include": "recognition/prompts/*.txt", "outDir": "./dist/src" },
-      { "include": "recognition/models/*.onnx", "outDir": "./dist/src" }
+      { "include": "recognition/models/*.onnx", "outDir": "./dist/src" },
+      { "include": "views/*.hbs", "outDir": "./dist/src" }
     ],
     "watchAssets": true
   }

@@ -1,6 +1,6 @@
 // Замер точности на эталонах: распознаёт каждое фото из input/ и сравнивает
 // с эталоном из output/ с тем же номером (input/01.jpg ↔ output/01.json).
-//   npm run eval:golden [-- --limit N]
+//   npm run eval:golden [-- --limit N] [-- --only 02,05]
 // Каждое фото стоит реальных запросов к OpenRouter
 import 'dotenv/config';
 import 'reflect-metadata';
@@ -21,6 +21,8 @@ import { DocumentReader } from '../src/recognition/document-reader';
 import { HandwrittenOpeningsService } from '../src/recognition/handwritten-openings.service';
 import { LlmClient } from '../src/recognition/llm.client';
 import { OpeningClassifierService } from '../src/recognition/opening-classifier.service';
+import { DEFAULT_PROMPTS, PromptKey } from '../src/prompts/prompts.constants';
+import { PromptsService } from '../src/prompts/prompts.service';
 import { RecognitionService } from '../src/recognition/recognition.service';
 
 const GOLDEN_DIR = 'test/golden';
@@ -82,6 +84,9 @@ async function main() {
   const args = process.argv.slice(2);
   const limitIndex = args.indexOf('--limit');
   const limit = limitIndex >= 0 ? Number(args[limitIndex + 1]) : Infinity;
+  const onlyIndex = args.indexOf('--only');
+  const only =
+    onlyIndex >= 0 ? new Set(args[onlyIndex + 1].split(',')) : undefined;
   const inputDir = join(GOLDEN_DIR, 'input');
   const outputDir = join(GOLDEN_DIR, 'output');
 
@@ -103,11 +108,16 @@ async function main() {
     new OpeningClassifierService(),
     new HandwrittenOpeningsService(),
     config,
+    // Замер идёт по промптам из файлов, правки со страницы /admin/prompts не видны
+    {
+      get: (key: PromptKey) => DEFAULT_PROMPTS[key],
+    } as unknown as PromptsService,
   );
 
   const files = readdirSync(inputDir)
     .filter((name) => IMAGES.includes(extname(name).toLowerCase()))
     .filter((name) => existsSync(join(outputDir, `${parse(name).name}.json`)))
+    .filter((name) => !only || only.has(parse(name).name))
     .sort()
     .slice(0, limit);
 

@@ -470,4 +470,79 @@ describe('App (e2e)', () => {
       expect(res.json()).toMatchObject({ code: 'invalid_callback_url' });
     });
   });
+
+  describe('prompts page', () => {
+    const PAGE = `${API}/admin/prompts`;
+    const auth = (password = 'admin-password-123') => ({
+      authorization: `Basic ${Buffer.from(`admin:${password}`).toString('base64')}`,
+    });
+    const form = () => ({
+      ...auth(),
+      'content-type': 'application/x-www-form-urlencoded',
+    });
+
+    it('asks for a password', async () => {
+      const res = await app.inject({ url: PAGE });
+      expect(res.statusCode).toBe(401);
+      expect(res.headers['www-authenticate']).toContain('Basic');
+
+      const wrong = await app.inject({ url: PAGE, headers: auth('nope') });
+      expect(wrong.statusCode).toBe(401);
+    });
+
+    it('shows the current prompts from files', async () => {
+      const res = await app.inject({ url: PAGE, headers: auth() });
+      expect(res.statusCode).toBe(200);
+      expect(res.headers['content-type']).toContain('text/html');
+      expect(res.body).toContain('Фото рукописных бланков');
+      expect(res.body).toContain('Документы PDF, DOC, DOCX');
+      expect(res.body).toContain('из файла');
+    });
+
+    it('saves a prompt and resets it to the file', async () => {
+      const saved = await app.inject({
+        method: 'POST',
+        url: `${PAGE}/photo`,
+        headers: form(),
+        payload: `text=${encodeURIComponent('Новый <промпт>')}`,
+      });
+      expect(saved.statusCode).toBe(303);
+      expect(saved.headers.location).toBe(`${PAGE}?saved=photo`);
+      expect(prisma.prompts.get('photo')?.text).toBe('Новый <промпт>');
+
+      const page = await app.inject({
+        url: `${PAGE}?saved=photo`,
+        headers: auth(),
+      });
+      expect(page.body).toContain('Новый &lt;промпт&gt;');
+      expect(page.body).toContain('промпт сохранён');
+      expect(page.body).toContain('изменён');
+
+      const reset = await app.inject({
+        method: 'POST',
+        url: `${PAGE}/photo/reset`,
+        headers: auth(),
+      });
+      expect(reset.statusCode).toBe(303);
+      expect(prisma.prompts.has('photo')).toBe(false);
+    });
+
+    it('rejects an empty prompt and an unknown key', async () => {
+      const empty = await app.inject({
+        method: 'POST',
+        url: `${PAGE}/photo`,
+        headers: form(),
+        payload: 'text=%20',
+      });
+      expect(empty.statusCode).toBe(400);
+
+      const unknown = await app.inject({
+        method: 'POST',
+        url: `${PAGE}/other`,
+        headers: form(),
+        payload: 'text=x',
+      });
+      expect(unknown.statusCode).toBe(400);
+    });
+  });
 });

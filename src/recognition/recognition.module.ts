@@ -4,6 +4,7 @@ import { ConfigType } from '@nestjs/config';
 
 import { proxyOptions } from '../common/http.utils';
 import llmConfig from '../config/llm.config';
+import { PromptsModule } from '../prompts/prompts.module';
 import { LLM_BASE_URL, LLM_TIMEOUT_MS } from './constants/llm.constants';
 import { DocumentReader } from './document-reader';
 import { HandwrittenOpeningsService } from './handwritten-openings.service';
@@ -13,6 +14,7 @@ import { RecognitionService } from './recognition.service';
 
 @Module({
   imports: [
+    PromptsModule,
     HttpModule.registerAsync({
       inject: [llmConfig.KEY],
       useFactory: ({ apiKey, proxyUrl }: ConfigType<typeof llmConfig>) => ({

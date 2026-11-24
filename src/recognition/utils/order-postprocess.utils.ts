@@ -106,6 +106,9 @@ export function postprocessPhotoItems(rawItems: OrderItem[]): OrderItem[] {
       }
       roundCoordinates(item);
 
+      // Стеклопакет на листе монтажника часто не пишут: пустое поле лучше
+      // выдуманного значения, которое модель подставит после замечания валидатора
+      if (typeof item.fill === 'string' && !item.fill.trim()) delete item.fill;
       if (!String(item.colorIn ?? '').trim()) item.colorIn = 'W';
       if (!String(item.colorOut ?? '').trim()) item.colorOut = 'W';
       return applyFillParams(item);

@@ -1,0 +1,145 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Промпты распознавания</title>
+  <style>
+    :root {
+      --bg: #f6f7f9;
+      --card: #ffffff;
+      --text: #1c2024;
+      --muted: #687076;
+      --border: #dfe3e6;
+      --accent: #2f6fde;
+      --accent-text: #ffffff;
+      --ok-bg: #e8f5ee;
+      --ok-text: #1d6b41;
+      --warn-bg: #fff4e0;
+      --warn-text: #8a5300;
+    }
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --bg: #111315;
+        --card: #1a1d20;
+        --text: #e6e8ea;
+        --muted: #9ba1a6;
+        --border: #2e3236;
+        --accent: #5a8fef;
+        --ok-bg: #16301f;
+        --ok-text: #7fd3a0;
+        --warn-bg: #33270f;
+        --warn-text: #f0c070;
+      }
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--text);
+      font: 15px/1.5 system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+    }
+    main { max-width: 1100px; margin: 0 auto; padding: 32px 16px 64px; }
+    h1 { margin: 0 0 4px; font-size: 24px; }
+    .lead { margin: 0 0 24px; color: var(--muted); }
+    nav { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 24px; }
+    nav a {
+      padding: 6px 12px;
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      color: var(--text);
+      text-decoration: none;
+      background: var(--card);
+    }
+    .notice {
+      margin-bottom: 24px;
+      padding: 12px 16px;
+      border-radius: 8px;
+      background: var(--ok-bg);
+      color: var(--ok-text);
+    }
+    section {
+      margin-bottom: 32px;
+      padding: 20px;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      background: var(--card);
+    }
+    header { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; margin-bottom: 12px; }
+    h2 { margin: 0; font-size: 18px; }
+    .pill { padding: 2px 10px; border-radius: 999px; font-size: 13px; }
+    .pill.default { background: var(--bg); color: var(--muted); border: 1px solid var(--border); }
+    .pill.changed { background: var(--warn-bg); color: var(--warn-text); }
+    .meta { color: var(--muted); font-size: 13px; }
+    textarea {
+      width: 100%;
+      min-height: 60vh;
+      padding: 12px;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      background: var(--bg);
+      color: var(--text);
+      font: 13px/1.5 ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+      resize: vertical;
+    }
+    .actions { display: flex; gap: 12px; flex-wrap: wrap; align-items: center; margin-top: 12px; }
+    button {
+      padding: 9px 18px;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      background: var(--card);
+      color: var(--text);
+      font: inherit;
+      cursor: pointer;
+    }
+    button.primary { border-color: var(--accent); background: var(--accent); color: var(--accent-text); }
+    .hint { color: var(--muted); font-size: 13px; }
+  </style>
+</head>
+<body>
+  <main>
+    <h1>Промпты распознавания</h1>
+    <p class="lead">
+      Инструкции для модели, по которым она читает заявки.
+      Сохранённый промпт сразу начинает работать в боте и в API.
+    </p>
+
+    {{#if notice}}<div class="notice">{{notice}}</div>{{/if}}
+
+    <nav>
+      {{#each prompts}}<a href="#{{key}}">{{title}}</a>{{/each}}
+    </nav>
+
+    {{#each prompts}}
+    <section id="{{key}}">
+      <header>
+        <h2>{{title}}</h2>
+        {{#if isDefault}}
+          <span class="pill default">из файла</span>
+        {{else}}
+          <span class="pill changed">изменён</span>
+          <span class="meta">{{updatedAt}} МСК</span>
+        {{/if}}
+      </header>
+
+      <form method="post" action="{{action}}">
+        <textarea name="text" spellcheck="false" required>{{text}}</textarea>
+        <div class="actions">
+          <button class="primary" type="submit">Сохранить</button>
+          <span class="hint">Если сохранить текст без изменений относительно файла, промпт снова станет «из файла».</span>
+        </div>
+      </form>
+
+      {{#unless isDefault}}
+      <form method="post" action="{{action}}/reset"
+            onsubmit="return confirm('Вернуть промпт из файла? Изменения пропадут.')">
+        <div class="actions">
+          <button type="submit">Вернуть промпт из файла</button>
+        </div>
+      </form>
+      {{/unless}}
+    </section>
+    {{/each}}
+  </main>
+</body>
+</html>

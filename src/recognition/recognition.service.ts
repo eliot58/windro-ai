@@ -9,10 +9,8 @@ import llmConfig from '../config/llm.config';
 import {
   CONCURRENT_BLOCKS,
   CONCURRENT_JOBS,
-  DOCUMENT_PROMPT,
   DOCUMENT_USER_PROMPT,
   MAX_PHOTO_SIDE,
-  PHOTO_PROMPT,
   PHOTO_USER_PROMPT,
   PRIMARY_MODEL_ATTEMPTS,
   RETRY_DELAY_MS,
@@ -21,6 +19,7 @@ import { DocumentReader } from './document-reader';
 import { HandwrittenOpeningsService } from './handwritten-openings.service';
 import { LlmClient } from './llm.client';
 import { OpeningClassifierService } from './opening-classifier.service';
+import { PromptsService } from '../prompts/prompts.service';
 import { RecognitionError } from './recognition.error';
 import {
   AdditionalItem,
@@ -47,6 +46,7 @@ import {
   postprocessBlockItems,
   postprocessPhotoItems,
 } from './utils/order-postprocess.utils';
+import { finalizeEntranceDoor } from './utils/entrance-door.utils';
 import {
   sanitizeOrderItems,
   validateOrderItems,
@@ -64,6 +64,7 @@ export class RecognitionService {
     private readonly handwritten: HandwrittenOpeningsService,
     @Inject(llmConfig.KEY)
     private readonly config: ConfigType<typeof llmConfig>,
+    private readonly prompts: PromptsService,
   ) {}
 
   recognize(file: OrderFile): Promise<RecognitionResult> {
@@ -90,7 +91,7 @@ export class RecognitionService {
     const extractBlock = async (block: DocumentBlock) => {
       const candidate = await this.askUntilValid(
         this.config.documentModel,
-        DOCUMENT_PROMPT,
+        this.prompts.get('document'),
         DOCUMENT_USER_PROMPT,
         [block.image],
         (raw) => postprocessBlockItems(raw, block, mosquitoNets),
@@ -145,7 +146,7 @@ export class RecognitionService {
 
     const candidate = await this.askUntilValid(
       this.config.photoModel,
-      PHOTO_PROMPT,
+      this.prompts.get('photo'),
       PHOTO_USER_PROMPT,
       [image],
       postprocessPhotoItems,
@@ -155,6 +156,8 @@ export class RecognitionService {
       throw new RecognitionError('изделия не найдены');
     }
     await this.handwritten.correct(items, image);
+    // После локальной проверки открываний: подпись right/left на листе важнее рисунка
+    items.forEach(finalizeEntranceDoor);
 
     return {
       orderItems: replaceNonstandard(items),

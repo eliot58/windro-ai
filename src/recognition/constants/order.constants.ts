@@ -78,6 +78,8 @@ export const ITEM_FIELDS = new Set([
   'stvorka',
   'vImposts',
   'hImposts',
+  // Сырые строки входной двери с листа, убираются после сборки параметров
+  'doorText',
 ]);
 
 export const STVORKA_FIELDS = new Set([
@@ -87,6 +89,8 @@ export const STVORKA_FIELDS = new Set([
   'hImposts',
   'fill',
   'fillParam',
+  // Параметры входной двери: ручка, замок, цилиндр, петли и доводчик
+  'parameters',
 ]);
 
 export const VIMPOST_FIELDS = new Set([
@@ -123,6 +127,7 @@ export const CONSTRUCTION_TYPES = new Set([
   'Дверь балконная',
   'Дверь входная открывание наружу',
   'Дверь входная открывание вовнутрь',
+  'Дверь входная открывание во внутрь',
 ]);
 
 export const REQUIRED_FIELDS = ['constructionType', 'width', 'height', 'qu'];

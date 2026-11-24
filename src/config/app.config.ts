@@ -6,4 +6,5 @@ export default registerAs('app', () => ({
   nodeEnv: process.env.NODE_ENV!,
   port: Number(process.env.PORT ?? DEFAULT_PORT),
   apiKey: process.env.API_KEY!,
+  adminPassword: process.env.ADMIN_PASSWORD,
 }));

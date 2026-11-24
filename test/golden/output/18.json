@@ -1,0 +1,45 @@
+{
+  "orderItems": [
+    {
+      "colorIn": "W",
+      "colorOut": "W",
+      "qu": 1,
+      "furnitureName": "Фурнитура Дверная",
+      "constructionType": "Дверь входная открывание наружу",
+      "profileName": "Входная дверь 60",
+      "width": 700,
+      "height": 2120,
+      "stvorka": {
+        "openType": "pov",
+        "openSide": "right",
+        "parameters": [
+          {
+            "name": "Тип дверной ручки",
+            "value": "ручка скоба"
+          },
+          {
+            "name": "Замок",
+            "value": "многозапорный замок"
+          },
+          {
+            "name": "Цилиндр",
+            "value": "Ключ-Ключ"
+          },
+          {
+            "name": "Петли",
+            "value": "Elementis"
+          },
+          {
+            "name": "Количество петель",
+            "value": "3"
+          },
+          {
+            "name": "Доводчик",
+            "value": "Не ставить"
+          }
+        ]
+      }
+    }
+  ],
+  "addOrderitems": []
+}

@@ -1,15 +1,50 @@
 {
   "orderItems": [
-    {   "constructionType": "Дверь входная открывание наружу",
-        "profileName": "70 Brusbox", 
-        "furnitureName": "Двери (Вх.группа)", 
-        "fill": "4М1-14-4М1-14-4М1", 
-        "qu": 1, 
-        "width": 950, 
-        "height": 2100, 
-        "colorIn": "W",
-        "colorOut": "W",
-        "stvorka":{"openType": "pov", "openSide": "left", "hImposts":[{"y":700}]}
+    {
+      "constructionType": "Дверь входная открывание наружу",
+      "profileName": "70 Brusbox",
+      "furnitureName": "Фурнитура Дверная",
+      "fill": "4М1-14-4М1-14-4М1",
+      "qu": 1,
+      "width": 950,
+      "height": 2100,
+      "colorIn": "W",
+      "colorOut": "W",
+      "stvorka": {
+        "openType": "pov",
+        "openSide": "left",
+        "hImposts": [
+          {
+            "y": 700
+          }
+        ],
+        "parameters": [
+          {
+            "name": "Тип дверной ручки",
+            "value": "не указано"
+          },
+          {
+            "name": "Замок",
+            "value": "не указано"
+          },
+          {
+            "name": "Цилиндр",
+            "value": "Ключ-Ключ"
+          },
+          {
+            "name": "Петли",
+            "value": "Elementis"
+          },
+          {
+            "name": "Количество петель",
+            "value": "не указано"
+          },
+          {
+            "name": "Доводчик",
+            "value": "Не ставить"
+          }
+        ]
+      }
     }
   ]
 }

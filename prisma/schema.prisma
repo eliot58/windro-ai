@@ -20,3 +20,12 @@ model User {
   @@index([sellerCode])
   @@map("users")
 }
+
+// Промпты, изменённые на странице /admin/prompts. Нет строки — действует промпт из файла
+model Prompt {
+  key       String   @id
+  text      String
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+  @@map("prompts")
+}

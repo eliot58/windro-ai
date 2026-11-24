@@ -6,3 +6,4 @@ process.env.API_KEY ??= 'a'.repeat(64);
 process.env.PUBLIC_URL ??= 'https://api.example.com';
 process.env.TELEGRAM_WEBHOOK_SECRET ??= 'test-secret';
 process.env.LLM_API_KEY ??= 'test-key';
+process.env.ADMIN_PASSWORD ??= 'admin-password-123';

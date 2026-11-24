@@ -1,3 +1,5 @@
+import { DEFAULT_PROMPTS, PromptKey } from '../prompts/prompts.constants';
+import { PromptsService } from '../prompts/prompts.service';
 /* eslint-disable @typescript-eslint/no-unsafe-member-access -- данные приходят от модели и из XML, их форма проверяется валидатором */
 import { DocumentReader } from './document-reader';
 import { HandwrittenOpeningsService } from './handwritten-openings.service';
@@ -52,6 +54,9 @@ describe('RecognitionService', () => {
     { correct: jest.fn() } as unknown as OpeningClassifierService,
     { correct: jest.fn() } as unknown as HandwrittenOpeningsService,
     CONFIG as never,
+    {
+      get: (key: PromptKey) => DEFAULT_PROMPTS[key],
+    } as unknown as PromptsService,
   );
 
   beforeEach(() => {

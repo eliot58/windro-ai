@@ -1,15 +1,45 @@
 {
-    "orderItems": [
-        {
-            "constructionType": "Дверь входная открывание наружу",
-            "profileName": "REHAU Входн. дв. NEW 70",
-            "furnitureName": "Входные группы",
-            "fill": "4x14x4x14x4",
-            "qu": 1,
-            "width": 1000,
-            "height": 2300,
-            "colorIn": "W",
-            "colorOut": "W",
-            "stvorka":{"openType": "pov", "openSide": "left"}
-        }]
+  "orderItems": [
+    {
+      "constructionType": "Дверь входная открывание наружу",
+      "profileName": "REHAU Входн. дв. NEW 70",
+      "furnitureName": "Фурнитура Дверная",
+      "fill": "4x14x4x14x4",
+      "qu": 1,
+      "width": 1000,
+      "height": 2300,
+      "colorIn": "W",
+      "colorOut": "W",
+      "stvorka": {
+        "openType": "pov",
+        "openSide": "left",
+        "parameters": [
+          {
+            "name": "Тип дверной ручки",
+            "value": "не указано"
+          },
+          {
+            "name": "Замок",
+            "value": "не указано"
+          },
+          {
+            "name": "Цилиндр",
+            "value": "Ключ-Ключ"
+          },
+          {
+            "name": "Петли",
+            "value": "Elementis"
+          },
+          {
+            "name": "Количество петель",
+            "value": "не указано"
+          },
+          {
+            "name": "Доводчик",
+            "value": "Не ставить"
+          }
+        ]
+      }
+    }
+  ]
 }

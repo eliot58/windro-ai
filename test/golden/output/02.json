@@ -1,27 +1,86 @@
 {
   "orderItems": [
     {
-        "constructionType": "Дверь входная открывание наружу",
-        "profileName": "REHAU T116/70", 
-        "furnitureName": "Наж.гар.DR 35", 
-        "fill": "40мм 6Energy Light/14/4/12/4LowE",
-        "qu": 1, 
-        "width": 885, 
-        "height": 2100, 
-        "colorIn": "серый",
-        "colorOut": "серый",
-        "stvorka":{"openType": "pov", "openSide": "right"}
+      "constructionType": "Дверь входная открывание наружу",
+      "profileName": "REHAU T116/70",
+      "furnitureName": "Фурнитура Дверная",
+      "fill": "40мм 6Energy Light/14/4/12/4LowE",
+      "qu": 1,
+      "width": 885,
+      "height": 2100,
+      "colorIn": "серый",
+      "colorOut": "серый",
+      "stvorka": {
+        "openType": "pov",
+        "openSide": "right",
+        "parameters": [
+          {
+            "name": "Тип дверной ручки",
+            "value": "Наж.гар.DR 35"
+          },
+          {
+            "name": "Замок",
+            "value": "не указано"
+          },
+          {
+            "name": "Цилиндр",
+            "value": "Ключ-Ключ"
+          },
+          {
+            "name": "Петли",
+            "value": "Elementis"
+          },
+          {
+            "name": "Количество петель",
+            "value": "не указано"
+          },
+          {
+            "name": "Доводчик",
+            "value": "Не ставить"
+          }
+        ]
+      }
     },
     {
-        "constructionType": "Дверь входная открывание наружу",
-        "profileName": "REHAU T116/70",
-        "furnitureName": "Наж.гар.DR 35",
-        "fill": "40мм 6Energy Light/14/4/12/4LowE",
-        "qu": 3,
-        "width": 860,
-        "height": 2090,
-        "colorIn": "серый",
-        "colorOut": "серый", 
-        "stvorka":{"openType": "pov", "openSide": "left"}}
+      "constructionType": "Дверь входная открывание наружу",
+      "profileName": "REHAU T116/70",
+      "furnitureName": "Фурнитура Дверная",
+      "fill": "40мм 6Energy Light/14/4/12/4LowE",
+      "qu": 3,
+      "width": 860,
+      "height": 2090,
+      "colorIn": "серый",
+      "colorOut": "серый",
+      "stvorka": {
+        "openType": "pov",
+        "openSide": "left",
+        "parameters": [
+          {
+            "name": "Тип дверной ручки",
+            "value": "Наж.гар.DR 35"
+          },
+          {
+            "name": "Замок",
+            "value": "не указано"
+          },
+          {
+            "name": "Цилиндр",
+            "value": "Ключ-Ключ"
+          },
+          {
+            "name": "Петли",
+            "value": "Elementis"
+          },
+          {
+            "name": "Количество петель",
+            "value": "не указано"
+          },
+          {
+            "name": "Доводчик",
+            "value": "Не ставить"
+          }
+        ]
+      }
+    }
   ]
 }

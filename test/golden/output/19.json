@@ -1,0 +1,45 @@
+{
+  "orderItems": [
+    {
+      "colorIn": "W",
+      "colorOut": "W",
+      "qu": 1,
+      "furnitureName": "Фурнитура Дверная",
+      "constructionType": "Дверь входная открывание во внутрь",
+      "profileName": "Входная дверь",
+      "width": 1000,
+      "height": 2000,
+      "stvorka": {
+        "openType": "pov",
+        "openSide": "right",
+        "parameters": [
+          {
+            "name": "Тип дверной ручки",
+            "value": "офисная ручка"
+          },
+          {
+            "name": "Замок",
+            "value": "многозапорный замок"
+          },
+          {
+            "name": "Цилиндр",
+            "value": "Ключ-Ключ"
+          },
+          {
+            "name": "Петли",
+            "value": "Elementis"
+          },
+          {
+            "name": "Количество петель",
+            "value": "3"
+          },
+          {
+            "name": "Доводчик",
+            "value": "Не ставить"
+          }
+        ]
+      }
+    }
+  ],
+  "addOrderitems": []
+}

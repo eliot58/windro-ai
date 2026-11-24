@@ -46,7 +46,13 @@ export class RecognitionCompletedDto {
   @ApiProperty({
     type: 'array',
     items: { type: 'object' },
-    description: 'Изделия: окна и двери с размерами, импостами и створками',
+    description: [
+      'Изделия: окна и двери с размерами, импостами и створками.',
+      'У входной двери furnitureName всегда «Фурнитура Дверная», а в stvorka.parameters ровно шесть',
+      'пунктов {name, value} в этом порядке: Тип дверной ручки, Замок, Цилиндр, Петли,',
+      'Количество петель, Доводчик. constructionType: «Дверь входная открывание наружу»',
+      'или «Дверь входная открывание во внутрь».',
+    ].join(' '),
     example: [
       {
         constructionType: 'Окно',
