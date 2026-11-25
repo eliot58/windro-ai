@@ -58,6 +58,7 @@ export class OrderRequestsService {
     await this.post(requestId, callbackUrl, {
       request_id: requestId,
       status: 'completed',
+      cloud: result.cloud,
       orderItems: result.orderItems,
       ...(result.addOrderitems.length && {
         addOrderitems: result.addOrderitems,

@@ -44,6 +44,13 @@ export class RecognitionCompletedDto {
   status: 'completed';
 
   @ApiProperty({
+    example: 'Позиция 1: высота изменена с 3140 на 3000',
+    description:
+      'Комментарий для менеджера: что изменено относительно заявки. Пункты через «; », номер позиции считается с 1 по orderItems. Нет замечаний — пустая строка',
+  })
+  cloud: string;
+
+  @ApiProperty({
     type: 'array',
     items: { type: 'object' },
     description: [

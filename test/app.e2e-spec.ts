@@ -20,7 +20,11 @@ const CALLBACK_URL = 'https://front.example.com/callback';
 const ORDER_ITEMS = [
   { constructionType: 'Окно', width: 1200, height: 1400, qu: 1 },
 ];
-const RESULT = { orderItems: ORDER_ITEMS, addOrderitems: [] };
+const RESULT = {
+  orderItems: ORDER_ITEMS,
+  addOrderitems: [],
+  cloud: 'Позиция 1: арка',
+};
 
 async function until(condition: () => boolean) {
   for (let i = 0; i < 200 && !condition(); i++) {
@@ -380,6 +384,7 @@ describe('App (e2e)', () => {
       expect(post.mock.calls[0][1]).toEqual({
         request_id,
         status: 'completed',
+        cloud: 'Позиция 1: арка',
         orderItems: ORDER_ITEMS,
       });
       expect(recognition.recognize.mock.calls[0][0]).toMatchObject({

@@ -43,7 +43,7 @@ const DESCRIPTION = `
 
 Когда результат готов, мы отправляем **POST** с JSON на \`callback_url\`:
 
-- успех — \`RecognitionCompletedDto\`: \`{ request_id, status: "completed", orderItems, addOrderitems? }\`
+- успех — \`RecognitionCompletedDto\`: \`{ request_id, status: "completed", cloud, orderItems, addOrderitems? }\`
 - ошибка — \`RecognitionFailedDto\`: \`{ request_id, status: "error", error_type, message }\`
 
 Тип файла определяется по расширению имени, а если его нет — по Content-Type части \`file\`.

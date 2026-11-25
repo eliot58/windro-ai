@@ -46,6 +46,7 @@ import {
   postprocessBlockItems,
   postprocessPhotoItems,
 } from './utils/order-postprocess.utils';
+import { CloudBlock, mergeClouds, readCloud } from './utils/cloud.utils';
 import { finalizeEntranceDoor } from './utils/entrance-door.utils';
 import {
   sanitizeOrderItems,
@@ -88,7 +89,7 @@ export class RecognitionService {
     const mosquitoNets = parseMosquitoNets(fullText);
     const queue = new JobQueue(CONCURRENT_BLOCKS);
     const failedBlocks: number[] = [];
-    const extractBlock = async (block: DocumentBlock) => {
+    const extractBlock = async (block: DocumentBlock): Promise<CloudBlock> => {
       const candidate = await this.askUntilValid(
         this.config.documentModel,
         this.prompts.get('document'),
@@ -102,11 +103,11 @@ export class RecognitionService {
         if (items.length === 1 && !isNonstandard(items[0])) {
           await this.openings.correct(items[0], block.image);
         }
-        return items;
+        return { items, cloud: readCloud(candidate.raw) };
       }
 
       failedBlocks.push(block.blockNumber);
-      return [];
+      return { items: [], cloud: '' };
     };
     const perBlock = await Promise.all(
       blocks.map((block) => queue.run(() => extractBlock(block))),
@@ -119,10 +120,11 @@ export class RecognitionService {
       );
     }
 
+    const blockItems = perBlock.map(({ items }) => items);
     const items =
       blocks[0].documentType === DocumentType.Image
-        ? deduplicateAcrossBlocks(perBlock)
-        : perBlock.flat();
+        ? deduplicateAcrossBlocks(blockItems)
+        : blockItems.flat();
     if (!items.length) {
       throw new RecognitionError('изделия не найдены');
     }
@@ -130,6 +132,7 @@ export class RecognitionService {
     return {
       orderItems: replaceNonstandard(items),
       addOrderitems: await this.readAdditionalItems(file, extension, pageTexts),
+      cloud: mergeClouds(perBlock, items),
     };
   }
 
@@ -165,6 +168,7 @@ export class RecognitionService {
         candidate.raw.addOrderitems,
         items,
       ),
+      cloud: readCloud(candidate.raw),
     };
   }
 

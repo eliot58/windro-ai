@@ -62,10 +62,15 @@ export function finalizeEntranceDoor(item: OrderItem): OrderItem {
     stvorka.openSide = 'left';
   }
 
-  const value = (key: keyof typeof DOOR_PARAMETERS, raw: string) => ({
-    name: DOOR_PARAMETERS[key].name,
-    value: raw || DOOR_PARAMETERS[key].fallback,
-  });
+  // Промпт может вернуть и готовые параметры, тогда они важнее умолчаний
+  const ready = Array.isArray(stvorka.parameters)
+    ? (stvorka.parameters as unknown[]).filter(isObject)
+    : [];
+  const value = (key: keyof typeof DOOR_PARAMETERS, raw: string) => {
+    const { name, fallback } = DOOR_PARAMETERS[key];
+    const given = ready.find((entry) => text(entry.name) === name);
+    return { name, value: raw || text(given?.value) || fallback };
+  };
   stvorka.parameters = [
     value('handle', text(door.handle)),
     value('lock', text(door.lock)),

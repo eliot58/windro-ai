@@ -24,6 +24,8 @@ export type OrderFile = OrderFileType & { content: Buffer };
 export interface RecognitionResult {
   orderItems: OrderItem[];
   addOrderitems: AdditionalItem[];
+  // Комментарий модели для менеджера: что изменено относительно заявки
+  cloud: string;
 }
 
 export enum DocumentType {

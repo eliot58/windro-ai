@@ -92,6 +92,30 @@ describe('finalizeEntranceDoor', () => {
     ]);
   });
 
+  it('keeps ready parameters from the model in the spec order', () => {
+    const item = finalizeEntranceDoor(
+      door({
+        stvorka: {
+          openType: 'pov',
+          openSide: 'right',
+          parameters: [
+            { name: 'Доводчик', value: 'Ставить' },
+            { name: 'Замок', value: 'многозапорный замок' },
+            { name: 'Количество петель', value: '3' },
+          ],
+        },
+      }),
+    );
+    expect(stvorkaOf(item).parameters.map((p) => p.value)).toEqual([
+      'не указано',
+      'многозапорный замок',
+      'Ключ-Ключ',
+      'Elementis',
+      '3',
+      'Ставить',
+    ]);
+  });
+
   it('ignores a title without door words', () => {
     const item = finalizeEntranceDoor(
       door({ doorText: { title: 'Z створка' } }),

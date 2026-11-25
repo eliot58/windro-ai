@@ -47,7 +47,7 @@ npm run start:dev
 
 `/recognitions` принимает `multipart/form-data` с полями `file` и `callback_url` (`seller_code` можно передать, он не используется).
 Ответ `202`: `{ status: "accepted", request_id }`. Результат приходит POST-запросом с JSON на `callback_url`:
-`{ request_id, status: "completed", orderItems, addOrderitems? }` или `{ request_id, status: "error", error_type, message }`.
+`{ request_id, status: "completed", cloud, orderItems, addOrderitems? }` или `{ request_id, status: "error", error_type, message }`.
 Ошибки запроса приходят со статусами `400` и `401` в виде `{ code, message }`. Схемы описаны в Swagger.
 
 ## Проверки
